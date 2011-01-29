@@ -1,7 +1,45 @@
 Badgnet::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
+  
+  namespace :admin do
+    match '/', :to => "admin#index", :as => :home
+    resources :clients do
+      #get 'login', :on => :member
+      get 'new', :on => :member
+      post 'multi_update', :on => :collection
+      
+    end
+    #resources :badge_images do
+    #  post 'multi_update', :on => :collection
+    #end
+    #with_options :controller => "stats" do
+    #  match '/daily_stats', :to => "stats#daily_stats"
+    #end
+  end  
 
+  controller :client do
+    scope :via => :get do
+      match '/client' => :home
+      match '/client/login' => :login
+      match '/client/logout' => :logout
+      match '/client/signup' => :signup
+      match '/client/edit'  => :edit
+      match '/client/change_password' => :change_password
+      match '/client/forgot_password' => :forgot_password
+    end
+    scope :via => :post do
+      match '/client/login' => :login
+      match '/client/signup' => :signup
+      match '/client/update' => :update
+      match '/client/change_password' => :change_password
+      match '/client/forgot_password' => :forgot_password
+    end
+    
+  end
+  
+  root :to => "sites#index"
+  
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

@@ -1,0 +1,54 @@
+<h1>Clients</h1>
+
+<% form_tag("", :method => "GET", :style => "margin-bottom: 20px; border: 1px solid #999999; padding: 10px;")  do %>
+<div>	
+	Client Id: <%= text_field_tag "id", @id %>
+	Name: <%= text_field_tag "name", @name %>
+	Username: <%= text_field_tag "username", @username %>
+</div>
+<div>
+	Rows: <%= text_field_tag "limit", @limit %>
+	<%= check_box_tag("show_inactive", "1", @show_inactive) %> Show Inactive
+	<%= submit_tag "Filter" %>
+</div>
+<% end %>
+
+<%= form_tag(new_admin_client_url, :method => "GET") %>
+	<div style="margin-bottom: 10px;">
+		<%= submit_tag "New Client" %>
+	</div>
+
+<% if @clients.length > 0 %>
+	<%= form_tag(multi_update_admin_clients_url) %>
+
+	<div style="margin-bottom: 10px;">
+		<%= submit_tag "Inactivate" %>
+	</div>
+	<table class="data" style="margin-bottom: 10px; width: 100%;">
+		<tr>
+			<th style="width: 30px;">Select</th>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Username</th>			
+			<th>Active</th>
+		</tr>
+		<% for c in @clients %>
+		<tr>
+			<td style="text-align: center;">
+				<%= check_box_tag "client_id[]", c.id, false, :class => "check" %>
+			</td>
+			<td><%= link_to c.id, edit_admin_client_url(c) %></td>
+			<td><%= c.name %></td>
+			<td><%= c.username %></td>		
+			<td><%= c.active %></td>
+		</tr>		
+		<% end %>
+	</table>
+
+<% else %>
+
+	<table width="100%">
+		<tr><td align="center">No clients found</td></tr>
+	</table>
+
+<% end %>

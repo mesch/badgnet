@@ -1,0 +1,20 @@
+<%= form_tag :action=> "signup" %>
+
+<%= error_messages_for 'client' %><br/>
+
+<label for="client_login">Company Name</label><br/>
+<%= text_field "client", "name" %><br/>
+
+<label for="client_login">Username</label><br/>
+<%= text_field "client", "username" %><br/>
+
+<label for="client_password">Password</label><br/>
+<%= password_field "client", "password" %><br/>
+
+<label for="client_password_confirmation">Password Confirmation</label><br/>
+<%= password_field "client", "password_confirmation" %><br/>
+
+<label for="client_email">Email</label><br/>
+<%= text_field "client", "email" %><br/>
+
+<%= submit_tag "Signup" %>

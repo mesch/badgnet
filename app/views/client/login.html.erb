@@ -1,0 +1,13 @@
+<h3>Client Login</h3> 
+<%= form_tag :action=>'login' %>
+ 
+  <label for="client_login">Username:</label><br/>
+  <%= text_field "client", "username" %><br/>
+
+  <label for="client_password">Password:</label><br/>
+  <%= password_field "client", "password" %><br/>
+
+<%= submit_tag "Submit" %>
+
+    <%= link_to 'Signup', :action => 'signup' %> |
+    <%= link_to 'Forgot my password', :action => 'forgot_password' %>      
