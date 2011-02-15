@@ -1,0 +1,68 @@
+@import "global";
+
+/* Global Badge Stuff */
+
+.image_list {
+	LI {
+		margin-bottom: 10px;			
+	}
+	.image {
+		@include float-left;
+		margin-right: 10px;
+	}
+}
+
+.image {
+	background-color: $white;
+	border: 1px solid $light-grey;
+	text-align: center;
+	@include rounded(5px);
+	
+	IMG {
+		height: 50px;
+		width: 50px;
+	}
+}
+
+/* A full badge */
+.full_badge {
+	.badge_info {
+		background-color: $light-grey; 
+		padding: 5px; 
+		width: 305px;
+		height: 45px;
+		color: $dark-grey;
+		@include rounded(5px);
+		
+		.links {
+			text-align: right;
+			font-size: $default-font-size - 4;			
+		}
+	}
+	
+	A {
+		color: $blue;
+	}
+
+	.name {
+		font-size: $default-font-size + 4;
+		font-weight: bold;
+	}
+
+	.desc {
+		font-size: $default-font-size - 1;
+	}
+}
+
+#full_badges { 
+	height: 600px;
+	
+	UL {
+		margin: 10px 0 0; 
+		padding: 0;
+	}
+	
+	LI {
+		margin-bottom: 10px; 
+	}	
+}		

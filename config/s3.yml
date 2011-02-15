@@ -1,0 +1,9 @@
+staging:
+ access_key_id: AKIAIPNZOCRRHXZVDTRQ
+ secret_access_key: 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
+ bucket: badgnet-staging
+ 
+production:
+ access_key_id: AKIAIPNZOCRRHXZVDTRQ
+ secret_access_key: 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
+ bucket: badgnet-prod

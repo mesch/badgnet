@@ -1,11 +1,24 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+first_kilgore:
+    user: kilgore
+    client: bob
+    badge: first
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+five_kilgore:
+    user: kilgore
+    client: bob
+    badge: five
+    
+beginner_kilgore:
+    user: kilgore
+    client: existingbob
+    badge: beginner
+
+advanced_kilgore:
+    user: kilgore
+    client: existingbob
+    badge: advanced
+    
+expert_kilgore:
+    user: kilgore
+    client: existingbob
+    badge: expert

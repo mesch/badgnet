@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>BadgNet</title>
+	  <%= raw stylesheet_link_tag 'screen', :media => "screen" %>
+	  <%= raw stylesheet_link_tag 'print', :media => "print" %>	
+	  <%= raw stylesheet_link_tag 'global' %>	
+	  <%= raw stylesheet_link_tag 'application' %>		
+	  <%= raw stylesheet_link_tag 'badge' %>	
+	  <%= csrf_meta_tag %>
+	</head>
+	<body id="<%= controller.controller_name %>_<%= controller.action_name %>">
+
+	<div id="wrapper">
+		<div id="header">
+			<%= link_to image_tag("spacer.gif", :id => "logo"), root_url %>
+			<div class="right nav">
+				<div style="text-align: right; margin-bottom: 5px;">
+				<% if @current_client %>
+					<span id="welcome">
+						welcome, <%= @current_client.name %> 
+						<%= link_to "[logout]", client_logout_url %>
+					</span>
+				<% end %>
+				</div>
+				<% if @current_client %>
+				<div>
+					<%= link_to "Badges", client_badges_url %>
+					<%= link_to "Account", client_account_url %>
+				</div>
+				<% end %>
+			</div>
+			<div class="clear"></div>
+		</div>
+
+		<div id="content">
+			<div><%= flash[:notice] %></div>
+			<div><%= flash[:message] %></div>
+			<div><%= flash[:warning] %></div>
+			<div><%= flash[:error] %></div>
+			<%= yield %>
+		</div>
+		<div id="footer">
+			<!-- <%= link_to "privacy", privacy_url %> -->
+			<!-- <%= link_to "terms of service", tos_url %> -->
+		</div>
+	</div>
+	<%= yield(:body_scripts) %>
+	<div id="fb-root"></div>
+	
+	<%= raw javascript_include_tag "mootools-core-1.3-full-compat" %>
+	<%= raw javascript_include_tag "mootools-more-1.3-full-compat" %>
+	<%= raw javascript_include_tag "rails" %>
+	<%= raw javascript_include_tag "global" %>
+	<%= raw javascript_include_tag "modal" %>
+	<%= raw javascript_include_tag "overlay" %>
+	<%= raw javascript_include_tag "client" %>	
+	<%= raw javascript_include_tag "ejs" %>
+	<%= raw javascript_include_tag "view" %>
+	<% if @current_user %>
+	<script type="text/javascript">
+		/* Useful info when doing javascript queries */
+		var fb_id = <%= @current_user.get_facebook_id %>;
+		var group = <%= @current_user.is_group? %>;
+	</script>
+	<% end %>
+</body>
+</html>
+

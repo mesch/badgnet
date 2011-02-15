@@ -12,20 +12,6 @@
 
 ActiveRecord::Schema.define(:version => 20110125071303) do
 
-  create_table "actions", :force => true do |t|
-    t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "actions_badges", :force => true do |t|
-    t.integer  "badge_id"
-    t.integer  "action_id"
-    t.integer  "threshold"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "badge_images", :force => true do |t|
     t.integer  "client_id"
     t.string   "image_file_name"
@@ -36,16 +22,30 @@ ActiveRecord::Schema.define(:version => 20110125071303) do
     t.datetime "updated_at"
   end
 
+  add_index "badge_images", ["client_id"], :name => "index_badge_images_on_client_id"
+
   create_table "badges", :force => true do |t|
-    t.integer  "client_id",                                      :null => false
-    t.string   "name",           :limit => 30,                   :null => false
-    t.string   "description",    :limit => 80,                   :null => false
-    t.boolean  "active",                       :default => true
+    t.integer  "client_id"
+    t.string   "name"
+    t.string   "description"
+    t.boolean  "active",         :default => true
     t.integer  "badge_image_id"
-    t.integer  "limit"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "badges", ["client_id"], :name => "index_badges_on_client_id"
+
+  create_table "badges_feats", :force => true do |t|
+    t.integer  "badge_id"
+    t.integer  "feat_id"
+    t.integer  "threshold"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "badges_feats", ["badge_id"], :name => "index_badges_feats_on_badge_id"
+  add_index "badges_feats", ["feat_id"], :name => "index_badges_feats_on_feat_id"
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -53,18 +53,25 @@ ActiveRecord::Schema.define(:version => 20110125071303) do
     t.string   "hashed_password"
     t.string   "email"
     t.string   "salt"
+    t.string   "activation_code"
+    t.boolean  "activated",       :default => false
+    t.string   "api_key"
     t.boolean  "active",          :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "user_actions", :force => true do |t|
-    t.integer  "user_id"
+  add_index "clients", ["username"], :name => "index_clients_on_username"
+
+  create_table "feats", :force => true do |t|
     t.integer  "client_id"
-    t.integer  "action_id"
+    t.string   "name"
+    t.boolean  "active",     :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "feats", ["client_id"], :name => "index_feats_on_client_id"
 
   create_table "user_badges", :force => true do |t|
     t.integer  "user_id"
@@ -74,6 +81,20 @@ ActiveRecord::Schema.define(:version => 20110125071303) do
     t.datetime "updated_at"
   end
 
+  add_index "user_badges", ["client_id"], :name => "index_user_badges_on_client_id"
+  add_index "user_badges", ["user_id", "client_id"], :name => "by_user_client"
+
+  create_table "user_feats", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "client_id"
+    t.integer  "feat_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_feats", ["client_id"], :name => "index_user_feats_on_client_id"
+  add_index "user_feats", ["user_id", "client_id"], :name => "by_user_client"
+
   create_table "users", :force => true do |t|
     t.string   "first_name",  :limit => 50
     t.string   "last_name",   :limit => 50
@@ -82,5 +103,7 @@ ActiveRecord::Schema.define(:version => 20110125071303) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "users", ["facebook_id"], :name => "index_users_on_facebook_id", :unique => true
 
 end

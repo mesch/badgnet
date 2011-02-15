@@ -1,0 +1,155 @@
+@import "compass";
+
+/* All kinds of fun color stuff */
+$dark-grey: #666;
+$light-grey: lighten($dark-grey, 50%);
+$blue: #60b0db;
+$red: red;
+$green: green;
+//$light-yellow: #FAF7E3;
+$light-yellow: lighten(yellow, 20%);
+$white: #fff;
+$black: #000;
+
+/* Facebook related styles */
+$facebook-grey : #C1C1C1;
+$facebook-light-grey : #F2F2F2;
+$facebook-dark-blue : #3b5998;
+$facebook-light-blue : #dfe3ee;
+
+$default-font-size: 12px;
+
+@mixin rounded($radius) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	border-radius: $radius;
+}
+
+html,body,p,div,img,h1,h2,h3,h4,dl,dd,dt,form,table,td,tr,form {
+	font-weight: normal;
+	font: $default-font-size "lucida grande",tahoma,verdana,arial,sans-serif; 
+	
+	/* verdana, arial, sans-serif; */
+	color: $dark-grey;
+}
+
+BODY, HTML {
+	background-image: url('/images/titled_bg.png');
+	background-repeat: repeat;
+}
+
+LI {
+	list-style: none;
+}
+
+/* global functions */
+.hidden {
+	display: none;
+}
+
+.left {
+	@include float-left;
+}
+
+.right {
+	@include float-right;
+}
+
+.center {
+	text-align: center;
+}
+
+.clear {
+	clear: both;
+	font-size: 1px;
+}
+
+.data {
+	border: 1px solid $dark-grey;
+	border-collapse: collapse;
+
+	TH {
+		background-color: $light-grey;
+		padding: 3px;
+	}
+
+	TD {
+		padding: 3px;
+	}
+}
+
+A {
+	text-decoration: none;
+	color: $dark-grey;	
+	
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+STRONG {
+	font-family: "Arial Black", Gadget, sans-serif;
+}
+
+LABEL {
+	font-size: $default-font-size - 2;
+	font-weight: bold;
+}
+
+H1 {
+	font-size: $default-font-size + 4;
+}
+
+.section {
+	margin-bottom: 25px;
+	padding-left: 10px;
+}
+
+.header {
+	border-bottom: 1px solid $dark-grey;	
+	font-size: $default-font-size - 2;
+	padding-bottom: 2px;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+
+.submit_button {
+	background-color: $blue;
+	color: $white;
+	border: 1px solid $blue;
+	cursor: pointer;
+	font-size: $default-font-size + 2;
+	font-weight: bold;
+	padding: 3px;
+	@include rounded(5px);
+	
+	&:hover {
+		color: $light-yellow;
+	}
+}
+
+.spinner {
+	position: absolute;
+	@include opacity(0.9);
+	z-index: 999;
+	background: $white;
+
+	.spinner-msg {
+		text-align: center;
+		font-weight: bold;
+		font-size: $default-font-size - 2;
+		margin-bottom: 5px;
+	}
+
+	.spinner-img {
+		background: url(/images/spinner.gif) no-repeat;
+		width: 24px;
+		height: 24px;
+		margin: 0 auto;
+	}
+}
+
+.small {
+	font-size: $default-font-size - 2;
+}

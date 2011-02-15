@@ -1,0 +1,29 @@
+first_1:
+  badge: first
+  feat: burger
+  threshold: 1
+
+ten_1:
+  badge: ten
+  feat: burger
+  threshold: 10
+  
+beginner_1:
+  badge: beginner
+  feat: view_trailer
+  threshold: 1
+
+advanced_1:
+  badge: advanced
+  feat: share_trailer
+  threshold: 5
+
+expert_1:
+  badge: expert
+  feat: share_trailer
+  threshold: 5
+
+expert_2:
+  badge: expert
+  feat: write_review
+  threshold: 1

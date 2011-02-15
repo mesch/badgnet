@@ -1,0 +1,19 @@
+<ul class="image_list">
+	<%- image_rows.each_with_index do |row, index| -%>
+	
+	<%# If there are more than one rows in the list hide them %>
+	<%- hide_row = index > 0 ? "hidden" : "" -%>
+	
+	<li class="<%= hide_row %>">
+		<%- for i in row -%>
+		<div class="image <%= @selected_image[i.id] %>" data-badge-image-id="<%= i.id %>">
+			<%= image_tag i.image(:thumb), :class => "badge_image" %>
+		</div>
+		<%- end -%>
+		<div class="clear"></div>
+	</li>
+	<%- end -%>
+	<%- if image_rows.length > 1 -%>
+		<%= link_to "see more...", "#", :class => "see_more" %>
+	<%- end -%>
+</ul>

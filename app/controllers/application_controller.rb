@@ -3,20 +3,13 @@ class ApplicationController < ActionController::Base
 
   def login_required
     if session[:client_id]
+      @current_client = Client.find(session[:client_id])
       return true
     end
     flash[:warning]='Please login to continue.'
-    p request.path
-    p request.fullpath
     session[:return_to] = request.path
-    p session[:return_to]
     redirect_to :controller => "client", :action => "login"
     return false 
-  end
-
-  def current_client
-    client_id = session[:client_id]
-    return Client.find(client_id)
   end
 
   def redirect_to_stored

@@ -1,0 +1,42 @@
+<%= error_messages_for 'client' %><br/>
+
+<%= form_tag(client_account_url, :method => "post") do %>
+
+	<h3 class="header">Account Info</h3>
+	<div class="section">
+		<div class="action_buttons">
+		<%= link_to "Change Password", client_change_password_url, :class => "action_button" %>
+		<%= link_to "Change Email", client_change_email_url, :class => "action_button" %>
+		</div>
+		<table>
+			<tr>
+				<td><%= label_tag 'Id' %></td> 
+				<td>
+					<%= text_field_tag :id, @client.id, :disabled => true %>
+				</td>
+			</tr>
+			<tr>
+				<td><%= label_tag 'Company Name', 'Company Name' %></td> 
+				<td>
+					<%= text_field_tag :name, @client.name, :class => "required", :maxlength => 50 %>
+				</td>
+			</tr>
+			<tr>
+				<td><%= label_tag 'Username' %></td> 
+				<td>
+					<%= text_field_tag :username, @client.username, :disabled => true %>
+				</td>
+			</tr>
+			<tr>
+				<td><%= label_tag 'Email' %></td> 
+				<td>
+					<%= text_field_tag :email, @client.email, :disabled => true, :maxlength => 50 %>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="margin: 10px 0 0;">
+		<%= content_tag :button, "Update Account", :type => :submit, :class => :submit_button %>
+		or <%= link_to "cancel", client_home_url %>
+	</div>
+<% end %>

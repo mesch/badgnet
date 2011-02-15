@@ -1,3 +1,5 @@
+require 'subdomain'
+
 Badgnet::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -5,92 +7,67 @@ Badgnet::Application.routes.draw do
   namespace :admin do
     match '/', :to => "admin#index", :as => :home
     resources :clients do
-      #get 'login', :on => :member
-      get 'new', :on => :member
       post 'multi_update', :on => :collection
-      
     end
-    #resources :badge_images do
-    #  post 'multi_update', :on => :collection
-    #end
-    #with_options :controller => "stats" do
-    #  match '/daily_stats', :to => "stats#daily_stats"
-    #end
   end  
 
-  controller :client do
+  namespace :client do
     scope :via => :get do
-      match '/client' => :home
-      match '/client/login' => :login
-      match '/client/logout' => :logout
-      match '/client/signup' => :signup
-      match '/client/edit'  => :edit
-      match '/client/change_password' => :change_password
-      match '/client/forgot_password' => :forgot_password
+      match '/' => :home      ### TODO: add a real home page
+      match '/home' => :home  ### TODO: add a real home page
+      match '/login' => :login
+      match '/logout' => :logout
+      match '/signup' => :signup
+      match '/activate' => :activate
+      match '/reactivate' => :reactivate
+      match '/account'  => :account
+      match '/change_email' => :change_email
+      match '/change_password' => :change_password
+      match '/forgot_password' => :forgot_password
+      match '/badges' => :badges
+      match '/badge' => :new_badge, :as => :new_badge
+      match '/badge/:id' => :edit_badge, :as => :edit_badge
+      match '/feat' => :new_feat, :as => :new_feat
+      match '/feat/:id' => :edit_feat, :as => :edit_feat
+      match '/images' => :images
     end
     scope :via => :post do
-      match '/client/login' => :login
-      match '/client/signup' => :signup
-      match '/client/update' => :update
-      match '/client/change_password' => :change_password
-      match '/client/forgot_password' => :forgot_password
+      match '/login' => :login
+      match '/signup' => :signup
+      match '/reactivate' => :reactivate
+      match '/account' => :account
+      match '/change_email' => :change_email
+      match '/change_password' => :change_password
+      match '/forgot_password' => :forgot_password
+      match '/badge' => :create_badge, :as => :create_badge
+      match '/badge/:id' => :update_badge, :as => :update_badge
+      match '/feat' => :create_feat, :as => :create_feat
+      match '/feat/:id' => :update_feat, :as => :update_feat
+      match '/images' => :images_submit, :as => :images_submit
     end
-    
   end
   
-  root :to => "sites#index"
+  constraints(APISubdomain) do
+    match '/' => "sites#home" # for now - will probably point to some help doc
+    namespace :v1 do
+      match '/' => "sites#home" # for now - will probably point to some help doc
+      controller :clients do
+        match '/clients/badges' => :badges, :via => :get
+        match '/clients/feats' => :feats, :via => :get
+      end
+      controller :users do
+        match '/users/badges' => :badges, :via => :get
+        match '/users/feats' => :feats, :via => :get
+      end
+      controller :feats do
+        match '/feats/log' => :log, :via => :post
+      end
+    end
+  end
+
+  match '/privacy', :to => "application#privacy"
+  match '/tos', :to => "application#tos"
   
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
+  root :to => "sites#home"
 
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
-
-  # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => "welcome#index"
-
-  # See how all your routes lay out with "rake routes"
-
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
 end

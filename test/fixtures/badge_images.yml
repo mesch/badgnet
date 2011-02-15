@@ -1,11 +1,50 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+bronze_trophy:
+    id: 1
+    image_file_name: bronze_trophy.png
+    image_content_type: image/png
+    image_file_size: 15039
+silver_trophy:
+    id: 2
+    image_file_name: silver_trophy.png
+    image_content_type: image/png
+    image_file_size: 15039
+gold_trophy:
+    id: 3
+    image_file_name: gold_trophy.png
+    image_content_type: image/png
+    image_file_size: 15039
+silver_star:
+    id: 4
+    image_file_name: silver_star.png
+    image_content_type: image/png
+    image_file_size: 15039
+gold_star:
+    id: 5
+    image_file_name: gold_star.png
+    image_content_type: image/png
+    image_file_size: 15039
+one:
+    id: 6
+    image_file_name: one.png
+    image_content_type: image/png
+    image_file_size: 15039
+five:
+    id: 7
+    image_file_name: five.png
+    image_content_type: image/png
+    image_file_size: 15039
+ten:
+    id: 8
+    image_file_name: ten.png
+    image_content_type: image/png
+    image_file_size: 15039
+twenty:
+    id: 9
+    image_file_name: twenty.png
+    image_content_type: image/png
+    image_file_size: 15039
+up:
+    id: 10
+    image_file_name: up.png
+    image_content_type: image/png
+    image_file_size: 15039

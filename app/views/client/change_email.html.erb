@@ -1,0 +1,21 @@
+<%= error_messages_for 'client' %>
+
+<%= form_tag :action => 'change_email' %>
+
+<h3 class="header">Change Email</h3>
+<div class="section">
+	<div class="note"> NOTE: If you change your email, you will have to re-activate your account. </div>
+	<table>
+		<tr>
+			<td><%= label_tag 'New Email' %></td> 
+			<td>
+				<%= text_field_tag :email, "" %>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<div style="margin: 10px 0 0;">
+	<%= content_tag :button, 'Change Email', :type => :submit, :class => :submit_button %>
+	or <%= link_to "cancel", client_account_url %>
+</div>

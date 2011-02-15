@@ -1,23 +1,47 @@
 bob:
-  id: 1000001
-  name: "Bob's Burgers"
-  username: bob
-  email: "matt.esch+badgnet_test1@gmail.com"
-  salt: 1000
-  hashed_password: 77a0d943cdbace52716a9ef9fae12e45e2788d39 # test
+    name: "Bob's Burgers"
+    username: bob
+    email: "matt.esch+badgnet_test1@gmail.com"
+    salt: 1000
+    hashed_password: 77a0d943cdbace52716a9ef9fae12e45e2788d39 # test
+    activation_code: 1234567890
+    api_key: f1f3559fb8d53a904fc1737533e8e955ddd09214
+    activated: true
 
 existingbob:
-  id: 1000002
-  name: "What About Bob?"
-  username: existingbob
-  email: "matt.esch+badgnet_test2@gmail.com"
-  salt: 1000
-  hashed_password: 77a0d943cdbace52716a9ef9fae12e45e2788d39 # test
+    name: "What About Bob?"
+    username: existingbob
+    email: "matt.esch+badgnet_test2@gmail.com"
+    salt: 1000
+    hashed_password: 77a0d943cdbace52716a9ef9fae12e45e2788d39 # test
+    activation_code: 1234567890
+    api_key: f1f3559fb8d53a904fc1737533e8e955ddd09215    
+    activated: true
 
 longbob:
-  id: 1000003
-  name: "Bob's Big Boy" 
-  username: longbob
-  email: "matt.esch+badgnet_test3@gmail.com"
-  salt: 1000
-  hashed_password: 00728d3362c26746ec25963f71be022b152237a9 # longtest
+    name: "Bob's Big Boy" 
+    username: longbob
+    email: "matt.esch+badgnet_test3@gmail.com"
+    salt: 1000
+    hashed_password: 00728d3362c26746ec25963f71be022b152237a9 # longtest
+    activation_code: 1234567890
+    api_key: f1f3559fb8d53a904fc1737533e8e955ddd09216
+    activated: true
+
+inactive:
+    name: "Inactive Account" 
+    username: inactive
+    email: "matt.esch+badgnet_test4@gmail.com"
+    salt: 1000
+    hashed_password: 77a0d943cdbace52716a9ef9fae12e45e2788d39 # test
+    activation_code: 1234567890
+    active: false
+    
+inactivated:
+    name: "Inactivated Account" 
+    username: inactivated
+    email: "matt.esch+badgnet_test5@gmail.com"
+    salt: 1000
+    hashed_password: 77a0d943cdbace52716a9ef9fae12e45e2788d39 # test
+    activation_code: 1234567890
+    activated: false

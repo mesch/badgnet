@@ -7,9 +7,13 @@ class CreateUsers < ActiveRecord::Migration
       t.boolean     "active",       :default => true
       t.timestamps
     end
+    
+    add_index :users, :facebook_id, :unique => :true
   end
 
   def self.down
     drop_table :users
+    
+    remove_index :users, :facebook_id
   end
 end

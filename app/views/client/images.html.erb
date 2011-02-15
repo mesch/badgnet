@@ -1,0 +1,49 @@
+<div class="hidden" id="upload_result"></div>
+
+<%= form_tag client_images_url, :method => :post, :multipart => true, :id => "image_upload", 
+	:target => "upload_target" do %>
+
+<h3 class="header">Your Badge Images</h3>
+
+<div class="section">
+	<% if @images.length > 0 %>
+	<ul class="image_list">
+		<% for i in @images %>
+		<li>
+			<div class="left image">
+			<%= image_tag i.image(:thumb), :class => "badge_image" %>
+			</div>
+		</li>
+		<% end %>
+		<div class="clear"></div>
+	</ul>
+	<% else %>
+	<div id="noImages">You haven't uploaded any images yet.</div>
+	<% end %>
+</div>
+
+<iframe id="upload_target" name="upload_target" src="" style="width: 0; height: 0;" class="hidden"></iframe>
+
+<h3 class="header">Upload Badge Image</h3>
+<div class="section">
+		<table>
+			<tr>
+				<th><%= label_tag :badge_image, "File to upload" %></th>
+				<td><%= file_field_tag :badge_image, :class => "required" %></td>
+			</tr>
+		</table>
+		<div style="margin: 15px 0 0">
+		<%= content_tag :button, "Upload Badge Image", :type => :submit, :class => :submit_button %>
+		or <%= link_to "cancel", client_home_url %>
+		</div>
+</div>
+
+<div style="margin: 10px 0;" id="image_conditions">
+	<p>Image Conditions</p>
+	<ul>
+		<li>Images must be one of these types: <%= BadgeImage::CONTENT_TYPES.join(", ") %>.</li>
+		<li>Max image size is <%= number_to_human_size BadgeImage::MAX_IMAGE_SIZE %>.</li>
+		<li>We reserve the right to take down any image.</li>
+	</ul>
+</div>
+<% end %>

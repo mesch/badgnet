@@ -1,11 +1,31 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+first:
+  client: bob
+  name: Welcome to Bob's!
+  description: Thank you for coming to Bob's Burgers.
+  badge_image_id: 6
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+five:
+  client: bob
+  name: Five Burger
+  description: Purchase of 5 burgers.
+  badge_image_id: 7
+  
+beginner:
+  client: existingbob
+  name: Beginner
+  description: You watched the "What about Bob?" trailer.
+  badge_image_id: 1
+
+advanced:
+  client: existingbob
+  name: Advanced
+  description: You shared the trailer 5 times.
+  badge_image_id: 2
+
+expert:
+  client: existingbob
+  name: Expert
+  description: You shared the trailer 5 times and wrote a review.
+  badge_image_id: 3
+
+

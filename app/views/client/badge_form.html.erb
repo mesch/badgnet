@@ -1,0 +1,81 @@
+<%= form_tag(controller.action_name == 'new_badge' ? client_create_badge_url : client_update_badge_url, 
+	:method => "post", :id => "create_badge_form") do %>
+	<h3 class="header">Official BadgNet Images</h3>	
+	<div class="section">
+		<%= render :partial => "image_selector", :locals => { :image_rows => @official_images } %>
+	</div>
+
+	<% if @client_images.length > 0 %>
+	<h3 class="header">Your Images</h3>
+	<div class="section">
+		<%= render :partial => "image_selector", :locals => { :image_rows => @client_images } %>
+	</div>
+	<% end %>
+
+	<h3 class="header">Badge Info</h3>
+	<div class="section">
+		<table>
+			<% if @badge.id %>
+				<tr>
+					<td><%= label_tag 'Id' %></td> 
+					<td>
+						<%= text_field_tag :id, @badge.id, :disabled => true %>
+					</td>
+				</tr>
+			<% end%>
+			<tr>
+				<td><%= label_tag 'Name' %></td> 
+				<td>
+					<%= text_field_tag :name, @badge.name, :class => "required", 
+						:maxlength => 30 %>
+				</td>
+			</tr>
+			<tr>
+				<td><%= label_tag 'Description' %></td> 
+				<td>
+					<%= text_field_tag :description, @badge.description, :class => "required",
+						:maxlength => 50 %>
+				</td>
+			</tr>
+			<tr>
+				<td><%= label_tag 'Active' %></td> 
+				<td>
+					<%= check_box_tag :active, "1", @badge.active, :class => "required" %>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<h3 class="header">Feats</h3>
+	<div class="section">
+		<table id="feat_table">
+			<tr>
+				<td>Feat</td>
+				<td>Threshold</td>
+				<td><input type="button" value="Add Feat" 
+					onclick="add_feat_row(<%= options_from_collection_for_select(@client_feats, "id", "name").to_json %>);" ></td>
+			</tr>
+			<% if @feats.length > 0 %>	
+				<% for f in @feats %>
+					<tr>
+						<td><%= select_tag "feats[]", options_from_collection_for_select(@client_feats, "id", "name", f.feat.id) %></td>
+						<td><%= text_field_tag "thresholds[]", f.threshold %></td>
+						<td><input type='button' value='Remove' onclick='remove_feat_row(this);'></td>
+					</tr>
+				<% end %>
+			<% end %>
+		</table>
+		<% if @feats.length == 0 %>
+			<div id="noFeats">You haven't attached any feats to this badge yet.</div>
+		<% end %>
+	</div>
+
+	<%= hidden_field_tag :badge_image_id, @badge.badge_image_id %>
+
+	<div style="margin: 10px 0 0;">
+		<%= content_tag :button, controller.action_name == 'new_badge' ? "Create Badge" : "Update Badge",
+			:type => :submit, :class => :submit_button %>
+		or <%= link_to "cancel", client_badges_url %>
+	</div>
+
+<% end %>

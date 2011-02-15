@@ -1,0 +1,89 @@
+burger1:
+    user: kilgore
+    client: bob
+    feat: burger
+
+burger2:
+    user: kilgore
+    client: bob
+    feat: burger
+
+burger3:
+    user: kilgore
+    client: bob
+    feat: burger
+    
+burger4:
+    user: kilgore
+    client: bob
+    feat: burger
+
+burger5:
+    user: kilgore
+    client: bob
+    feat: burger
+    
+burger6:
+    user: kilgore
+    client: bob
+    feat: burger
+    
+burger7:
+    user: kilgore
+    client: bob
+    feat: burger
+
+burger8:
+    user: kilgore
+    client: bob
+    feat: burger
+
+burger9:
+    user: kilgore
+    client: bob
+    feat: burger
+
+burger10:
+    user: kilgore
+    client: bob
+    feat: burger
+
+burger11:
+    user: kilgore
+    client: bob
+    feat: burger
+
+view1:
+    user: kilgore
+    client: existingbob
+    feat: view_trailer
+
+share1:
+    user: kilgore
+    client: existingbob
+    feat: share_trailer
+
+share2:
+    user: kilgore
+    client: existingbob
+    feat: share_trailer
+
+share3:
+    user: kilgore
+    client: existingbob
+    feat: share_trailer
+
+share4:
+    user: kilgore
+    client: existingbob
+    feat: share_trailer
+
+share5:
+    user: kilgore
+    client: existingbob
+    feat: share_trailer
+
+wrote1:
+    user: kilgore
+    client: existingbob
+    feat: write_review

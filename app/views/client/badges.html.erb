@@ -1,0 +1,81 @@
+<div class="left" id="badge_list">
+	<div id="full_badges">		
+		<div class="section_header">
+			<span>Badges</span>
+			<%= link_to "New Badge", client_new_badge_url, :id => "new_item_button" %>
+			<div class="clear"></div>
+		</div>
+		<div>
+		<ul class="image_list">
+		<% if @badges.length > 0 %>
+			<% for b in @badges %>
+				<li>
+				<div class="full_badge">
+					<div class="image">
+						<%= link_to image_tag(b.get_image, :class => "badge_image"),
+						 	client_edit_badge_url(b.id) %>
+					</div>
+					<div class="left badge_info">
+						<div class="name"><%= b.name %></div>
+						<div class="desc"><%= b.description %></div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				</li>
+			<% end %>
+			</ul>
+		<% end %>
+		<% if @badges.length == 0 %>
+			<div>You haven't created any badges yet.</div>
+		<% end %>
+		</div>
+	</div>
+</div>
+
+<div class="left" id="feat_list">	
+	<div class="section_header">
+		<span>Feats</span>
+		<%= link_to "New Feat", client_new_feat_url, :id => "new_item_button" %>
+		<div class="clear"></div>
+	</div>
+	<div class="full_feat">
+		<% if @feats.length > 0 %>
+			<ul class="list">
+				<% for f in @feats %>				
+				<li>
+					<div class="feat_info">
+						<div class="name"><%= link_to f.name, client_edit_feat_url(f.id) %></div>
+					</div>
+				</li>
+				<% end %>
+			</ul>
+		<% else %>			
+			<div>You haven't created any feats yet.</div>
+		<% end %>
+	</div>
+</div>
+
+<div class="left" id="image_list">	
+	<div class="section_header">
+		<span>Images</span>
+		<%= link_to "Upload Image", client_images_url, :id => "new_item_button" %>
+		<div class="clear"></div>
+	</div>
+	<div>
+		<ul class="image_list">
+			<% for image_row in @image_rows %>
+			<li>
+				<% for i in image_row %>
+					<div class="image">
+						<%= image_tag i.image(:thumb), :class => "badge_image" %>
+					</div>
+				<% end %>
+				<div class="clear"></div>
+			</li>
+			<% end%>
+		</ul>
+		<% if @image_rows.empty? %>
+			<div>You haven't uploaded any images yet.</div>
+		<% end %>
+	</div>
+</div>

@@ -1,6 +1,6 @@
 <h1>Clients</h1>
 
-<% form_tag("", :method => "GET", :style => "margin-bottom: 20px; border: 1px solid #999999; padding: 10px;")  do %>
+<%= form_tag("", :method => "GET", :style => "margin-bottom: 20px; border: 1px solid #999999; padding: 10px;")  do %>
 <div>	
 	Client Id: <%= text_field_tag "id", @id %>
 	Name: <%= text_field_tag "name", @name %>
@@ -13,21 +13,17 @@
 </div>
 <% end %>
 
-<%= form_tag(new_admin_client_url, :method => "GET") %>
-	<div style="margin-bottom: 10px;">
-		<%= submit_tag "New Client" %>
-	</div>
-
 <% if @clients.length > 0 %>
 	<%= form_tag(multi_update_admin_clients_url) %>
 
 	<div style="margin-bottom: 10px;">
-		<%= submit_tag "Inactivate" %>
+		<%= submit_tag "Activate", :name => "activate" %>
+		<%= submit_tag "Inactivate", :name => "inactivate" %>
 	</div>
 	<table class="data" style="margin-bottom: 10px; width: 100%;">
 		<tr>
 			<th style="width: 30px;">Select</th>
-			<th>Id</th>
+			<th>Client Id</th>
 			<th>Name</th>
 			<th>Username</th>			
 			<th>Active</th>

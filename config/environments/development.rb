@@ -22,5 +22,24 @@ Badgnet::Application.configure do
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
+
+  # Don't care if the mailer can't send
+  config.action_mailer.raise_delivery_errors = true 
+  config.serve_static_assets = true
+
+  # Set the default action mailer host..
+  OPTIONS[:site_url] = "localhost:3000"
+  config.action_mailer.default_url_options = { :host => OPTIONS[:site_url] }
+
+  # Internal email info
+  OPTIONS[:internal_email_to] = "matt.esch@gmail.com"
+  OPTIONS[:internal_error_to] = "matt.esch@gmail.com"
+
+  OPTIONS[:paperclip_storage_options] = {
+    :path => ":rails_root/public/system/#{Rails.env}/:class/:attachment/:id/:style.:extension",
+    :url => "/system/#{Rails.env}/:class/:attachment/:id/:style.:extension",
+    :default_url => "/images/missing_thumb.png"
+  }
+
 end
 

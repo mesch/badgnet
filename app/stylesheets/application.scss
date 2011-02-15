@@ -1,0 +1,320 @@
+@import "global";
+
+#wrapper {
+	margin: 0 auto;
+	width: 700px;
+	text-align: left;
+}
+
+#header {
+	margin-top: 10px;
+	padding: 5px;
+	background-color: $blue;
+	height: 45px;
+	text-align: left;
+	@include rounded(5px);
+	
+	#welcome {
+		font-size: $default-font-size - 2;
+		color: $light-yellow;
+		A {
+			margin: 0;
+		}
+	}
+	
+	A {
+		color: $white;
+	}
+	
+	.nav {
+		font-size: $default-font-size + 2;
+		padding: 3px 5px 0 0;
+		
+		A {
+			font-size: $default-font-size + 2;
+			margin-right: 10px;
+			
+			&:hover {
+				color: $light-yellow;
+			}
+		}
+	}
+}
+
+#footer {
+	text-align: right;
+	padding-top: 10px;
+	A {
+		color: black;
+		font-size: $default-font-size - 4;
+	}
+}
+
+#content {
+	padding: 15px 5px 10px;
+	background-color: $white;
+	margin-top: 15px;
+	@include min-height(450px);
+	@include rounded(5px);
+}
+
+#logo {
+	width: 200px;
+	height: 75px;
+	position: absolute;
+	top: 8px;
+	background: url(/images/badgme_logo_small.png);
+	border-style: none;
+}
+
+.action_buttons {
+	margin-bottom: 10px;
+}
+
+.action_button {
+	font-size: $default-font-size; 
+	color: $white; 
+	background-color: $blue; 
+	padding: 3px;
+	text-decoration: none;
+	margin: 5px 5px 0 0;
+	@include rounded(5px);
+}
+
+.full_feat {
+	.feat_info {
+		background-color: $light-grey; 
+		padding: 5px; 
+		width: 280px;
+		color: $dark-grey;
+		@include rounded(5px);
+		
+		.links {
+			text-align: right;
+			font-size: $default-font-size - 4;			
+		}
+	}
+
+	A {		
+		&:hover {
+			color: $blue;
+		}
+	}
+	
+	.name {
+		font-size: $default-font-size + 2;
+	}
+}
+
+.list {
+	LI {
+		margin-bottom: 10px;			
+	}
+}
+
+.note {
+	margin-bottom: 10px;
+}
+
+#feat_table {
+	width: 400px;
+}
+
+#client_badges {
+	.badge_description {
+		width: 550px;
+		padding: 5px;
+	}
+
+	.section_header {
+		font-size: $default-font-size + 8;
+		background-color: #faf7e3;
+		padding: 5px;
+		font-family: "Arial Black",Gadget,sans-serif;
+		@include rounded(5px);
+	}
+
+	.badge .badge_info .menu_text {
+		color: $dark-grey;
+	}
+
+	#new_item_button {
+		font-size: $default-font-size; 
+		color: $white; 
+		background-color: $blue; 
+		padding: 3px;
+		text-decoration: none;
+		margin: 5px 5px 0 0;
+		float: right;
+		display: block;
+		@include rounded(5px);
+	}
+
+	#badge_list {
+		width: 380px;
+	}
+
+	#image_list {
+		margin-left: 20px;
+		width: 280px;
+	}
+
+	#image_list .section_header {
+		width: 280px;
+		margin-bottom: 10px;
+	}
+
+	#feat_list {
+		margin-left: 20px;
+		width: 280px;
+	}
+
+	#feat_list .section_header {
+		width: 280px;
+		margin-bottom: 10px;
+	}
+
+	#feat_table {
+		width: 280px;
+	}
+
+	#no_badges {
+		margin-top: 10px;
+		text-align: center;
+	}
+
+	#awards {
+		@include min-height(150px);	
+	}
+}
+
+#client_badge {
+	#badge_users {
+		@include inline-block-list-container;
+		width: 550px;
+		LI {
+			@include inline-block-list-item(5px);
+			margin-bottom: 5px;
+		}
+	}
+	
+	.full_badge {
+		margin-bottom: 10px;
+	}
+}
+
+#client_new_badge {
+	.badge {
+		&.hover {
+			background-color: $blue;
+			border: 1px solid $dark-grey;
+		}
+	}
+
+	.selected {
+		background-color: $dark-grey;
+	}	
+	
+	INPUT[type="text"] {
+		padding: 2px;
+	}
+
+	#id {
+		width: 100 px;
+	}
+
+	#name {
+		width: 165px;
+	}
+
+	#description {
+		width: 350px;
+	}
+	
+}
+
+#client_edit_badge {
+	.badge {
+		&.hover {
+			background-color: $blue;
+			border: 1px solid $dark-grey;
+		}
+	}
+
+	.selected {
+		background-color: $dark-grey;
+	}	
+	
+	INPUT[type="text"] {
+		padding: 2px;
+	}
+
+	#id {
+		width: 165px;
+	}
+
+	#name {
+		width: 165px;
+	}
+
+	#description {
+		width: 350px;
+	}
+	
+}
+
+#client_images { 
+	/* Image Upload */
+		
+	#upload_result {
+		margin: 10px 0;
+		font-size: $default-font-size + 2;
+		
+		.success {
+			color: $green;
+		}
+		
+		.error {
+			color: $red;
+		}
+	}
+	
+	#image_conditions {
+		P {
+			font-size: $default-font-size - 2;
+			font-weight: bold;
+		}
+
+	 	UL {
+			margin-left: 10px;
+		}
+
+		LI {
+			list-style: disc;
+			padding-top: 2px;
+			margin-left: 10px;
+			font-size: $default-font-size - 2;
+			font-style: italic;
+		}
+	}
+	
+}
+
+#client_account {
+	#id {
+		width: 165px;
+	}
+
+	#name {
+		width: 165px;
+	}
+
+	#username {
+		width: 165px;
+	}	
+
+	#email {
+		width: 350px;
+	}
+	
+}

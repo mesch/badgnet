@@ -1,0 +1,39 @@
+<div><%= flash[:notice] %></div>
+
+<%= form_tag(controller.action_name == 'new_feat' ? client_create_feat_url : client_update_feat_url, 
+	:method => "post", :id => "create_badge_form") do %>
+
+	<h3 class="header">Feat Info</h3>
+	<div class="section">
+		<table>
+			<% if @feat.id %>
+				<tr>
+					<td><%= label_tag 'Id' %></td> 
+					<td>
+						<%= text_field_tag :id, @feat.id, :disabled => true %>
+					</td>
+				</tr>
+			<% end %>
+			<tr>
+				<td><%= label_tag 'Name' %></td> 
+				<td>
+					<%= text_field_tag :name, @feat.name, :class => "required", 
+						:maxlength => 30 %>
+				</td>
+			</tr>
+			<tr>
+				<td><%= label_tag 'Active' %></td> 
+				<td>
+					<%= check_box_tag :active, "1", @feat.active, :class => "required" %>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div style="margin: 10px 0 0;">
+		<%= content_tag :button, controller.action_name == 'new_feat' ? "Create Feat" : "Update Feat",
+			:type => :submit, :class => :submit_button %>
+		or <%= link_to "cancel", client_badges_url %>
+	</div>
+
+<% end %>

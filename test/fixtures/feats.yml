@@ -1,0 +1,15 @@
+burger:
+  client: bob
+  name: Purchased 1 burger.
+  
+view_trailer:
+  client: existingbob
+  name: Viewed trailer.
+
+share_trailer:
+  client: existingbob
+  name: Shared trailer.
+
+write_review:
+  client: existingbob
+  name: Wrote a review.

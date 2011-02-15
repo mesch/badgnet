@@ -1,13 +1,25 @@
-<h3>Client Login</h3> 
 <%= form_tag :action=>'login' %>
- 
-  <label for="client_login">Username:</label><br/>
-  <%= text_field "client", "username" %><br/>
 
-  <label for="client_password">Password:</label><br/>
-  <%= password_field "client", "password" %><br/>
+<h3 class="header">Client Login</h3>
+<div class="section">
+	<table>
+		<tr>
+			<td><%= label_tag 'Username' %></td> 
+			<td>
+				<%= text_field_tag :username, "" %>
+			</td>
+		</tr>
+		<tr>
+			<td><%= label_tag 'Password' %></td> 
+			<td>
+				<%= text_field_tag :password, "" %>
+			</td>
+		</tr>
+	</table>
+</div>
 
-<%= submit_tag "Submit" %>
-
-    <%= link_to 'Signup', :action => 'signup' %> |
-    <%= link_to 'Forgot my password', :action => 'forgot_password' %>      
+<div style="margin: 10px 0 0;">
+	<%= content_tag :button, 'Login', :type => :submit, :class => :submit_button %>
+	<%= link_to 'Signup', :action => 'signup' %> |
+    <%= link_to 'Forgot my password', :action => 'forgot_password' %>
+</div>    

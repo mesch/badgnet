@@ -2,19 +2,48 @@
 
 <%= error_messages_for 'client' %><br/>
 
-<label for="client_login">Company Name</label><br/>
-<%= text_field "client", "name" %><br/>
+<h3 class="header">Signup</h3>
+<div class="section">
+	<table>
+		<tr>
+			<td><%= label_tag 'Company Name', 'Company Name' %></td> 
+			<td>
+				<%= text_field_tag :name, "" %>
+			</td>
+		</tr>
+		<tr>
+			<td><%= label_tag 'Username' %></td> 
+			<td>
+				<%= text_field_tag :username, "" %>
+			</td>
+		</tr>
+		<tr>
+			<td><%= label_tag 'Password' %></td> 
+			<td>
+				<%= text_field_tag :password, "" %>
+			</td>
+		</tr>
+		<tr>
+			<td><%= label_tag 'Password Confirmation', 'Password Confirmation' %></td> 
+			<td>
+				<%= text_field_tag :password_confirmation, "" %>
+			</td>
+		</tr>
+		<tr>
+			<td><%= label_tag 'Email' %></td> 
+			<td>
+				<%= text_field_tag :email, "" %>
+			</td>
+		</tr>
+	</table>
+</div>
 
-<label for="client_login">Username</label><br/>
-<%= text_field "client", "username" %><br/>
+<div id="recaptcha_container">
+	<%= raw recaptcha_tags :public_key => OPTIONS[:recaptcha_public_key], 
+		:display => { :theme => "clean" } %>
+</div>
 
-<label for="client_password">Password</label><br/>
-<%= password_field "client", "password" %><br/>
-
-<label for="client_password_confirmation">Password Confirmation</label><br/>
-<%= password_field "client", "password_confirmation" %><br/>
-
-<label for="client_email">Email</label><br/>
-<%= text_field "client", "email" %><br/>
-
-<%= submit_tag "Signup" %>
+<div style="margin: 10px 0 0;">
+	<%= content_tag :button, 'Signup', :type => :submit, :class => :submit_button %>
+	or <%= link_to "cancel", client_login_url %>
+</div>

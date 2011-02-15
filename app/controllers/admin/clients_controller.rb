@@ -7,29 +7,25 @@ module Admin
       @limit = params[:limit] || 100
       @id = params[:id] ? params[:id].strip : ""
       @name = params[:name] ? params[:name].strip : ""
-      @username = params[:username] ? params[:name].strip : ""
+      @username = params[:username] ? params[:username].strip : ""
       @show_inactive = params[:show_inactive] ? true : false
 
-      conditions = []
+      conditions = {}
       
       if @name != ""
-        conditions << "name = '#{@name}'"
+        conditions[:name] = @name  
       end
       
       if @username != ""
-        conditions << "username = '#{@username}'"
+        conditions[:username] = @username
       end
       
       if @id != ""
-        if @id == "null" or @id == "nil"
-          conditions << "id is null"
-        else
-          conditions << "id = #{@id}"
-        end
+        conditions[:id] = @id
       end
       
       if !@show_inactive
-        conditions << "active = true"
+        conditions[:active] = true
       end
 
       @clients = Client.find(:all, :limit => @limit, :conditions => conditions)
@@ -41,48 +37,19 @@ module Admin
         flash[:error] = "You must select at least one client"
         return redirect_to(admin_clients_url)
       end
-
-      client = Client.find(params[:client_id])
-      clients.each { |u| u.update_attributes!(:active => false) }
-
-      flash[:notice] = "Client inactivated."
+      
+      clients = Client.find(params[:client_id])
+      if params['activate']  
+        clients.each { |c| c.update_attribute(:active, true) }
+      end
+      
+      if params['inactivate']  
+        clients.each { |c| c.update_attribute(:active, false) }
+      end      
+      
+      flash[:notice] = "Clients updated."
 
       redirect_to(:back)
-    end
-
-    ### needs work
-    def edit
-      @client = Client.find(params[:id])
-      @client.password = ""
-    end
-
-    ### needs work
-    def update
-      client = Client.find(params[:id])
-      new_password = params[:client][:password]
-
-      #if Client.update_attributes(params[:client])
-      #  redirect_to(admin_clients_url)
-      #else
-        flash[:error] = "There was a problem saving the client."
-        redirect_to(edit_admin_client_url)
-      #end
-    end
-    
-    def new
-      @client = Client.new
-    end
-    
-    def create
-      client = Client.create(params[:client])
-      client.encrypt_password
-
-      if client.save
-        redirect_to(admin_clients_url)
-      else
-        flash[:error] = "There was a problem saving the client."
-        redirect_to(new_admin_client_url)
-      end
     end
     
   end
