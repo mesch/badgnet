@@ -7,14 +7,14 @@ class CreateUserBadges < ActiveRecord::Migration
       t.timestamps
     end
     
-    add_index :user_badges, [:user_id, :client_id], :name => 'user_badges_by_user_client'
+    add_index :user_badges, [:user_id, :client_id], :name => 'by_user_client'
     add_index :user_badges, :client_id
   end
 
   def self.down
     drop_table :user_badges
     
-    remove_index :user_badges, 'user_badges_by_user_client'
+    remove_index :user_badges, 'by_user_client'
     remove_index :user_badges, :client_id
   end
 end

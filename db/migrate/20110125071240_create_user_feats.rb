@@ -6,15 +6,9 @@ class CreateUserFeats < ActiveRecord::Migration
       t.integer     "feat_id"
       t.timestamps
     end
-    
-    add_index :user_feats, [:user_id, :client_id], :name => 'by_user_client'
-    add_index :user_feats, :client_id
   end
 
   def self.down
     drop_table :user_feats
-    
-    remove_index :user_feats, 'by_user_client'
-    remove_index :user_feats, :client_id
   end
 end
