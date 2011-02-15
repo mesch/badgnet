@@ -193,6 +193,7 @@ class ClientController < ApplicationController
       unless verify_recaptcha(:private_key => OPTIONS[:recaptcha_private_key])      
         flash[:warning] = "Invalid captcha results. Please try again."
         render(:action => :signup)
+        return
       end
       c.activation_code = Client.generate_activation_code
       if c.save

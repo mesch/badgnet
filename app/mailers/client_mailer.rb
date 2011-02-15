@@ -1,6 +1,6 @@
 class ClientMailer < BaseMailer
 
-  def activation(to, username, activation_code, sent_at = Time.now)
+  def self.activation(to, username, activation_code, sent_at = Time.now)
     @subject    = "Please activate your account"
     @username   = username
     @activation_code = activation_code
@@ -10,7 +10,7 @@ class ClientMailer < BaseMailer
     @headers    = {}
   end
 
-  def forgot_password(to, username, password, sent_at = Time.now)
+  def self.forgot_password(to, username, password, sent_at = Time.now)
     @subject    = "Your password is ..."
     @username   = username
     @password   = password
@@ -20,7 +20,7 @@ class ClientMailer < BaseMailer
     @headers    = {}
   end
   
-  def changed_email(to, username, old_email, new_email, sent_at = Time.now)
+  def self.changed_email(to, username, old_email, new_email, sent_at = Time.now)
     @subject    = "You have changed your email"
     @username   = username
     @old_email  = old_email
