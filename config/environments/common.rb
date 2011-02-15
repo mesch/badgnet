@@ -16,13 +16,13 @@ OPTIONS[:recaptcha_private_key] = "6LeYRcESAAAAAEFIJkdDt9zoNmPZw5eoTKkSYB7b"
 # Default is to use postfix. Dev mode uses gmail. Test mode doesn't send mail
 
 # Use the same from address and return-path for all emails
-OPTIONS[:email_from] = "Badgnet Admin <admin@badg.net>"
-OPTIONS[:email_return_path] = "admin@badg.net"
+OPTIONS[:email_from] = "Badgnet Admin <admin@badg.me>"
+OPTIONS[:email_return_path] = "admin@badg.me"
 
 # Internal email info
-OPTIONS[:internal_email_to] = "admin@badg.net"
-OPTIONS[:internal_error_to] = "errors@badg.net"
-OPTIONS[:internal_email_from] = "internal@badg.net"
+OPTIONS[:internal_email_to] = "admin@badg.me"
+OPTIONS[:internal_error_to] = "errors@badg.me"
+OPTIONS[:internal_email_from] = "internal@badg.me"
 
 # Email settings for prod and staging
 OPTIONS[:action_mailer_deliver_method] = :smtp
