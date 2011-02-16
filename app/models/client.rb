@@ -52,15 +52,15 @@ class Client < ActiveRecord::Base
     new_pass = Client.random_string(5)
     self.password = self.password_confirmation = new_pass
     self.save
-    ClientMailer.forgot_password(self.email, self.username, new_pass).deliver
+    ClientMailer.send_forgot_password(self.email, self.username, new_pass).deliver
   end
   
   def send_activation
-    ClientMailer.activation(self.email, self.username, self.activation_code).deliver
+    ClientMailer.send_activation(self.email, self.username, self.activation_code).deliver
   end
   
   def send_email_change(old_email)
-    ClientMailer.changed_email(self.email, self.username, old_email, self.email).deliver
+    ClientMailer.send_changed_email(self.email, self.username, old_email, self.email).deliver
   end
   
   def update_email(new_email)
