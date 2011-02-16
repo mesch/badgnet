@@ -10,3 +10,4 @@ ActionMailer::Base.smtp_settings = {
     :user_name => OPTIONS[:email_username],
     :password => OPTIONS[:email_password],
     :enable_starttls_auto => OPTIONS[:enable_starttls_auto]
+}
