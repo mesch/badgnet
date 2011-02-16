@@ -52,6 +52,22 @@ module Admin
       redirect_to(:back)
     end
     
+    def show
+      @client = Client.find(params[:id])
+    end
+    
+    def generate_api_key
+      client = Client.find(params[:id])
+      unless client.api_key
+        if client.update_attributes(:api_key => Client.generate_api_key)
+          flash[:message] = "API Key generated."
+        else
+          flash[:error] = "There was an error generating the API Key. Please try again."
+        end
+      end
+      redirect_to(admin_client_url(client))
+    end
+    
   end
   
 end

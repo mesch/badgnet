@@ -8,6 +8,7 @@ Badgnet::Application.routes.draw do
     match '/', :to => "admin#index", :as => :home
     resources :clients do
       post 'multi_update', :on => :collection
+      post 'generate_api_key', :on => :member
     end
   end  
 

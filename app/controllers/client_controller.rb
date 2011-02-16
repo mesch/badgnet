@@ -195,14 +195,9 @@ class ClientController < ApplicationController
         render(:action => :signup)
         return
       end
-      c.activation_code = Client.generate_activation_code
-      if c.save
-        if c.send_activation()
+      if c.save and c.send_activation()
           flash[:message] = "Signup successful. An activation code has been sent by email."
           redirect_to :action =>'login'
-        else
-          flash[:warning]  = "Could not send an activation code to that email address. Please try again."
-        end            
       else
         flash[:warning] = "Signup unsuccessful."
       end
@@ -291,11 +286,8 @@ class ClientController < ApplicationController
       if client && client.active && activation_code == client.activation_code
         # Activate the client
         client.activate
-        # Set the client in the session
-        session[:client_id] = client.nil? ? nil : client.id
-        ### TODO send them back to login?
-        flash[:message] = "Congrats! Your account is now active."
-        redirect_to :action => :home
+        flash[:message] = "Congratulations! Your account is now active. Please login."
+        redirect_to :action => :login
       else 
         flash[:warning]  = "Invalid activation code. Maybe you've already activated. Try signing in."
         redirect_to :action => :login

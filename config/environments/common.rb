@@ -16,7 +16,7 @@ OPTIONS[:recaptcha_private_key] = "6LeYRcESAAAAAEFIJkdDt9zoNmPZw5eoTKkSYB7b"
 # Default is to use postfix. Dev mode uses gmail. Test mode doesn't send mail
 
 # Use the same from address and return-path for all emails
-OPTIONS[:email_from] = "Badgnet Admin <admin@badg.me>"
+OPTIONS[:email_from] = "BadgMe Admin <admin@badg.me>"
 OPTIONS[:email_return_path] = "admin@badg.me"
 
 # Internal email info
@@ -34,17 +34,5 @@ OPTIONS[:email_password] = ENV['SENDGRID_PASSWORD']
 OPTIONS[:email_domain] = ENV['SENDGRID_PASSWORD']
 OPTIONS[:enable_starttls_auto] = false
 
-# :smtp in most modes, :test in test mode 
-ActionMailer::Base.delivery_method = OPTIONS[:action_mailer_deliver_method]
 
-# Common settings
-ActionMailer::Base.smtp_settings = {
-    :address => OPTIONS[:email_address],
-    :port => OPTIONS[:email_port],
-    :domain => OPTIONS[:email_domain],
-    :authentication => OPTIONS[:email_authentication],    
-    :user_name => OPTIONS[:email_username],
-    :password => OPTIONS[:email_password],
-    :enable_starttls_auto => OPTIONS[:enable_starttls_auto]
-}
 

@@ -1,0 +1,59 @@
+<%= form_tag(generate_api_key_admin_client_url, :method => "post") do %>
+
+<h3>Show Client</h3>
+
+<table>
+	<tr>
+		<td><%= label_tag 'Id' %></td> 
+		<td>
+			<%= text_field_tag :id, @client.id, :disabled => true %>
+		</td>
+	</tr>
+	<tr>
+		<td><%= label_tag 'Company Name', 'Company Name' %></td> 
+		<td>
+			<%= text_field_tag :name, @client.name, :disabled => true, :maxlength => 50 %>
+		</td>
+	</tr>
+	<tr>
+		<td><%= label_tag 'Username' %></td> 
+		<td>
+			<%= text_field_tag :username, @client.username, :disabled => true %>
+		</td>
+	</tr>
+	<tr>
+		<td><%= label_tag 'Email' %></td> 
+		<td>
+			<%= text_field_tag :email, @client.email, :disabled => true, :maxlength => 50 %>
+		</td>
+	</tr>
+	<tr>
+		<td><%= label_tag 'Active' %></td> 
+		<td>
+			<%= check_box_tag :active, "1", @client.active, :disabled => true %>
+		</td>
+	</tr>
+	<tr>
+		<td><%= label_tag 'Activated' %></td> 
+		<td>
+			<%= check_box_tag :activated, "1", @client.activated, :disabled => true %>
+		</td>
+	</tr>
+	<tr>
+		<td><%= label_tag 'Activation Code' %></td> 
+		<td>
+			<%= text_field_tag :activation_code, @client.activation_code, :disabled => true, :maxlength => 50 %>
+		</td>
+	</tr>
+	<tr>
+		<td><%= label_tag 'API Key' %></td> 
+		<td>
+			<%= text_field_tag :api_key, @client.api_key, :disabled => true, :maxlength => 50 %>
+		</td>
+	</tr>	
+</table>
+
+<%= submit_tag "Generate API Key" %>
+
+<% end %>
+

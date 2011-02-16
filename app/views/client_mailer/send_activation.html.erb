@@ -1,0 +1,9 @@
+Welcome to BadgMe!<br><br>
+
+Please activate your account to start awarding badges.<br><br>
+
+<%= link_to "Activate Your Account", url_for(:controller => "client", :action => "activate", :client_id => @client_id,
+	:activation_code => @activation_code, :only_path => false)%><br><br>
+
+Regards,<br>
+BadgMe

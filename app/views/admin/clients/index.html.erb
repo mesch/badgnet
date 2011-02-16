@@ -33,7 +33,7 @@
 			<td style="text-align: center;">
 				<%= check_box_tag "client_id[]", c.id, false, :class => "check" %>
 			</td>
-			<td><%= link_to c.id, edit_admin_client_url(c) %></td>
+			<td><%= link_to c.id, admin_client_url(c) %></td>
 			<td><%= c.name %></td>
 			<td><%= c.username %></td>		
 			<td><%= c.active %></td>

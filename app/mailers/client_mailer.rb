@@ -1,9 +1,10 @@
 class ClientMailer < BaseMailer
 
-  def send_activation(to, username, activation_code)
+  def send_activation(to, username, client_id, activation_code)
     subject    = "Please activate your account"
     @username   = username
     @activation_code = activation_code
+    @client_id = client_id
     mail(:to => to, :subject => subject)
   end
 

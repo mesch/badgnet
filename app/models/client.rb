@@ -5,7 +5,7 @@ class Client < ActiveRecord::Base
   validates_length_of :name, :maximum => 50
   validates_length_of :email, :maximum => 50  
   validates_uniqueness_of :username
-  validates_presence_of :name, :username, :email, :salt, :activation_code
+  validates_presence_of :name, :username, :email, :salt
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email."
 
   # different validations for password, password_confirmation based on type of action
@@ -56,11 +56,14 @@ class Client < ActiveRecord::Base
   end
   
   def send_activation
-    ClientMailer.send_activation(self.email, self.username, self.activation_code).deliver
+    if self.update_attributes(:activation_code => Client.generate_activation_code)
+      return ClientMailer.send_activation(self.email, self.username, self.id, self.activation_code).deliver
+    end
+    return false
   end
   
   def send_email_change(old_email)
-    ClientMailer.send_changed_email(self.email, self.username, old_email, self.email).deliver
+    ClientMailer.send_changed_email(old_email, self.username, old_email, self.email).deliver
   end
   
   def update_email(new_email)
@@ -87,8 +90,8 @@ class Client < ActiveRecord::Base
     Client.secure_digest(Time.now, (1..10).map{ rand.to_s })
   end
 
-  def self.generate_api_token
-    Client.secure_digest(Time.now, self.username)
+  def self.generate_api_key
+    Client.secure_digest(Time.now, (1..10).map{ rand.to_s })
   end
   
   protected
