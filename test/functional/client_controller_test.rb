@@ -193,7 +193,7 @@ class ClientControllerTest < ActionController::TestCase
     assert_template "client/reactivate"
     assert flash[:warning]
     #enter a user and email that don't match
-    post :reactivate, :username => @bob.username, :email=>@existingbob.email
+    post :reactivate, :username => @bob.username, :email=>"test@abc.com"
     assert_response :success
     assert_nil session[:client_id]
     assert_template "client/reactivate"
@@ -213,9 +213,9 @@ class ClientControllerTest < ActionController::TestCase
   def test_activation
     get :activate, :activation_code => '1234567890', :client_id => @inactivated.id
     assert_response :redirect
-    assert session[:client_id]
+    assert_nil session[:client_id]
     assert flash[:message]
-    assert_redirected_to :action=>'home'
+    assert_redirected_to :action=>'login'
   end
 
   def test_missing_code_activation

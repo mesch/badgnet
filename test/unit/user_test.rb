@@ -9,7 +9,7 @@ class UserTest < ActiveSupport::TestCase
     u = User.new(:facebook_id => '1234', :first_name => 'tester', :last_name => 'testerson')
     assert u.save
     
-    u = User.new(:facebook_id => '1234')
+    u = User.new(:facebook_id => '12345')
     assert u.save
   end
 

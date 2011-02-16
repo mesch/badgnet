@@ -203,11 +203,11 @@ class ClientTest < ActiveSupport::TestCase
     c = Client.find(@bob) # save failed but c will have new password
     assert c.activated
     assert equal?(c, @bob, [:name, :username, :email, :hashed_password, :salt, :activation_code, :activate])
-    # succes
+    # success
     assert c.update_email("test@abc.com")
     assert_equal c.email, "test@abc.com"
     assert !c.activated
-    assert equal?(c, @bob, [:name, :username, :hashed_password, :salt, :activation_code, :activate])
+    assert equal?(c, @bob, [:name, :username, :hashed_password, :salt, :activate])
   end
   
 end

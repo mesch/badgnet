@@ -12,7 +12,7 @@
 			<tr>
 				<td><%= label_tag 'Id' %></td> 
 				<td>
-					<%= text_field_tag :id, @client.id, :disabled => true %>
+					<%= label_tag :id, @client.id %>
 				</td>
 			</tr>
 			<tr>
@@ -24,15 +24,21 @@
 			<tr>
 				<td><%= label_tag 'Username' %></td> 
 				<td>
-					<%= text_field_tag :username, @client.username, :disabled => true %>
+					<%= label_tag :username, @client.username %>
 				</td>
 			</tr>
 			<tr>
 				<td><%= label_tag 'Email' %></td> 
 				<td>
-					<%= text_field_tag :email, @client.email, :disabled => true, :maxlength => 50 %>
+					<%= label_tag :email, @client.email %>
 				</td>
 			</tr>
+			<tr>
+				<td><%= label_tag 'API Key' %></td> 
+				<td>
+					<%= label_tag :api_key, @client.api_key %>
+				</td>
+			</tr>			
 		</table>
 	</div>
 	<div style="margin: 10px 0 0;">

@@ -14,7 +14,7 @@ class ClientController < ApplicationController
       :order => 'active desc, created_at desc')
     @image_rows = BadgeImage.find(:all, 
       :conditions => {:client_id => @current_client.id },
-      :order => 'active desc, created_at desc ').in_groups_of(4, false)
+      :order => 'active desc, created_at asc').in_groups_of(4, false)
   end
 
   def new_badge
