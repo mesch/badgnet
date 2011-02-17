@@ -59,16 +59,25 @@ class User < ActiveRecord::Base
     user_feats = self.user_feats_by_client_id_grouped(client_id)
     for client_badge in client_badges
       unless user_badges[client_badge.id]
+        create_flag = true
         # go through each badge_feat to see if we can add the badge
-        for badge_feat in client_badge.badges_feats
-          if badge_feat.threshold > user_feats[badge_feat.feat_id]
-            break
+        if client_badge.badges_feats.empty?
+          create_flag = false
+        else
+          for badge_feat in client_badge.badges_feats
+            user_feat_count = user_feats[badge_feat.feat_id].nil? ? 0 : user_feats[badge_feat.feat_id]
+            if badge_feat.threshold > user_feat_count
+              create_flag = false
+              break
+            end
           end
         end
         # create a user_badge
-        user_badge = UserBadge.new(:user_id => self.id, :client_id => client_id, :badge_id => client_badge.id)
-        unless user_badge.save
-          return false
+        if create_flag
+          user_badge = UserBadge.new(:user_id => self.id, :client_id => client_id, :badge_id => client_badge.id)
+          unless user_badge.save
+            return false
+          end
         end
       end
     end
