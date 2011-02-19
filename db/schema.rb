@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110219063132) do
+ActiveRecord::Schema.define(:version => 20110219234059) do
 
   create_table "badge_images", :force => true do |t|
     t.integer  "client_id"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(:version => 20110219063132) do
     t.integer  "client_id"
     t.string   "name"
     t.string   "description"
-    t.boolean  "active",         :default => true
+    t.boolean  "active",         :default => false
     t.integer  "badge_image_id"
     t.datetime "created_at"
     t.datetime "updated_at"

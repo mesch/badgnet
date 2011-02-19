@@ -116,8 +116,7 @@ class ClientController < ApplicationController
 
   def create_feat
     begin
-      active = active = params[:active].nil? ? false : params[:active]
-      feat = Feat.create(:name => params[:name], :active => active, :client_id => @current_client.id)
+      feat = Feat.create(:name => params[:name], :client_id => @current_client.id)
       feat.save!
       flash[:message] = "Your feat was created successfully."
       redirect_to :action => :badges
@@ -136,8 +135,7 @@ class ClientController < ApplicationController
   def update_feat
     feat = Feat.find(params[:id])
     begin
-      active = params[:active].nil? ? false : params[:active]
-      feat.update_attributes!(:name => params[:name], :active => active, :client_id => @current_client.id)
+      feat.update_attributes!(:name => params[:name], :client_id => @current_client.id)
       feat.save!
       flash[:message] = "Your feat was updated successfully."
       redirect_to :action => :badges

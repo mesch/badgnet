@@ -3,29 +3,34 @@ first:
   name: Welcome to Bob's!
   description: Thank you for coming to Bob's Burgers.
   badge_image_id: 6
+  active: true
 
 five:
   client: bob
   name: Five Burger
   description: Purchase of 5 burgers.
   badge_image_id: 7
+  active: true
   
 beginner:
   client: existingbob
   name: Beginner
   description: You watched the "What about Bob?" trailer.
   badge_image_id: 1
+  active: true
 
 advanced:
   client: existingbob
   name: Advanced
   description: You shared the trailer 5 times.
   badge_image_id: 2
+  active: true
 
 expert:
   client: existingbob
   name: Expert
   description: You shared the trailer 5 times and wrote a review.
   badge_image_id: 3
+  active: true
 
 

@@ -11,7 +11,7 @@ class BadgeTest < ActiveSupport::TestCase
 
   def test_create
     b = Badge.new(:client_id => @c.id, :name => 'first time', :description => 'welcome, new user!', :badge_image_id => @bi.id)
-    assert b.active
+    assert !b.active
     assert b.save
   end
   

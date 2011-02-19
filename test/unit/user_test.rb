@@ -227,7 +227,8 @@ class UserTest < ActiveSupport::TestCase
     assert_not_equal badges2.length, 0
     # adding a badge with no feats
     image = BadgeImage.find(:first)
-    badge = Badge.new(:name => "empty badge", :client_id => @existingbob.id, :description => "test", :badge_image_id => image.id)
+    badge = Badge.new(:name => "empty badge", :client_id => @existingbob.id, :description => "test", :badge_image_id => image.id,
+      :active => true)
     assert badge.save
     # updating shouldn't add any more user badges
     user.update_badges(@existingbob.id)

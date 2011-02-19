@@ -30,4 +30,12 @@ class Badge < ActiveRecord::Base
     end
   end
   
+  def display_active()
+    if self.active
+      return "Active"
+    else
+      return "Inactive"
+    end
+  end
+  
 end
