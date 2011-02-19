@@ -51,19 +51,27 @@ class Client < ActiveRecord::Base
   def send_new_password
     new_pass = Client.random_string(5)
     self.password = self.password_confirmation = new_pass
-    self.save
-    ClientMailer.send_forgot_password(self.email, self.username, new_pass).deliver
+    if self.save
+      # Send the client email through a delayed job
+      ClientMailer.delay.send_forgot_password(self.email, self.username, new_pass)
+      return true
+    end
+    return false
   end
   
   def send_activation
     if self.update_attributes(:activation_code => Client.generate_activation_code)
-      return ClientMailer.send_activation(self.email, self.username, self.id, self.activation_code).deliver
+      # Send the client email through a delayed job
+      ClientMailer.delay.send_activation(self.email, self.username, self.id, self.activation_code)
+      return true
     end
     return false
   end
   
   def send_email_change(old_email)
-    ClientMailer.send_changed_email(old_email, self.username, old_email, self.email).deliver
+    # Send the client email through a delayed job
+    ClientMailer.delay.send_changed_email(old_email, self.username, old_email, self.email)
+    return true
   end
   
   def update_email(new_email)

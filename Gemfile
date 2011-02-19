@@ -4,8 +4,9 @@ gem 'rails', '3.0.0'
 gem 'mysql'
 gem 'ruby-debug'
 gem "compass", ">= 0.10.6"
-#gem 'haml'
+gem 'delayed_job'
 
+# gem 'haml'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 

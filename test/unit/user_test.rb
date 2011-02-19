@@ -219,4 +219,21 @@ class UserTest < ActiveSupport::TestCase
     assert_equal badges2.length, user.user_badges_by_client_id(@bob.id).length
   end
 
+  def test_update_badges_no_feats
+    user = User.find(@kilgore)
+    badges = user.user_badges_by_client_id(@existingbob.id)
+    badges2 = user.user_badges_by_client_id(@bob.id)
+    assert_not_equal badges.length, 0
+    assert_not_equal badges2.length, 0
+    # adding a badge with no feats
+    image = BadgeImage.find(:first)
+    badge = Badge.new(:name => "empty badge", :client_id => @existingbob.id, :description => "test", :badge_image_id => image.id)
+    assert badge.save
+    # updating shouldn't add any more user badges
+    user.update_badges(@existingbob.id)
+    assert user.user_badges_by_client_id_grouped(@existingbob.id)[@expert.id]
+    assert_equal badges.length, user.user_badges_by_client_id(@existingbob.id).length    
+    assert_equal badges2.length, user.user_badges_by_client_id(@bob.id).length        
+  end
+
 end
