@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110219234059) do
+ActiveRecord::Schema.define(:version => 20110225005922) do
 
   create_table "badge_images", :force => true do |t|
     t.integer  "client_id"
@@ -47,6 +47,18 @@ ActiveRecord::Schema.define(:version => 20110219234059) do
   add_index "badges_feats", ["badge_id"], :name => "index_badges_feats_on_badge_id"
   add_index "badges_feats", ["feat_id"], :name => "index_badges_feats_on_feat_id"
 
+  create_table "client_stats", :force => true do |t|
+    t.integer  "client_id"
+    t.date     "day"
+    t.integer  "users"
+    t.integer  "user_badges"
+    t.integer  "user_feats"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "client_stats", ["client_id", "day"], :name => "client_stats_by_client_day"
+
   create_table "clients", :force => true do |t|
     t.string   "name"
     t.string   "username"
@@ -59,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20110219234059) do
     t.boolean  "active",          :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "time_zone",       :default => "Pacific Time (US & Canada)"
   end
 
   add_index "clients", ["username"], :name => "index_clients_on_username"
@@ -97,7 +110,7 @@ ActiveRecord::Schema.define(:version => 20110219234059) do
   end
 
   add_index "user_badges", ["client_id"], :name => "index_user_badges_on_client_id"
-  add_index "user_badges", ["user_id", "client_id"], :name => "by_user_client"
+  add_index "user_badges", ["user_id", "client_id"], :name => "user_badges_by_user_client"
 
   create_table "user_feats", :force => true do |t|
     t.integer  "user_id"
@@ -108,7 +121,7 @@ ActiveRecord::Schema.define(:version => 20110219234059) do
   end
 
   add_index "user_feats", ["client_id"], :name => "index_user_feats_on_client_id"
-  add_index "user_feats", ["user_id", "client_id"], :name => "by_user_client"
+  add_index "user_feats", ["user_id", "client_id"], :name => "user_feats_by_user_client"
 
   create_table "users", :force => true do |t|
     t.string   "first_name",  :limit => 50

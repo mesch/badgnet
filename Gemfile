@@ -5,6 +5,7 @@ gem 'mysql'
 gem 'ruby-debug'
 gem "compass", ">= 0.10.6"
 gem 'delayed_job'
+gem 'googlecharts'
 
 # gem 'haml'
 # Bundle edge Rails instead:

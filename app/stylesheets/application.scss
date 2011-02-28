@@ -118,6 +118,33 @@
 
 #feat_table {
 	width: 400px;
+
+	TH {
+		font-weight: bold;
+	}
+}
+
+#client_home {
+	.image_section {
+		width: 450px;
+		height: 600px;
+	}
+	
+	TABLE, TH, TD {
+		width: 220px;
+		border: 1px solid $light-grey;
+	}
+	
+	TH {
+		font-weight: bold;
+	}
+	
+}
+
+#client_account {
+	TABLE, TH, TD {
+		border: 1px solid $light-grey;
+	}
 }
 
 #client_badges {
@@ -214,7 +241,7 @@
 	.selected {
 		background-color: $dark-grey;
 	}	
-	
+		
 	INPUT[type="text"] {
 		padding: 2px;
 	}

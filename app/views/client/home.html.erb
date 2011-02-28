@@ -1,0 +1,71 @@
+<%= form_tag(client_home_url, :method => "post") do %>
+	<div class="left image_section">
+		<div class="right">
+			<%= label_tag 'Start Day', 'Start Day'%>
+			<%= text_field_tag :start_day, @start_day, :class => :date_field %>
+			<%= label_tag 'End Day', 'End Day'%>
+			<%= text_field_tag :end_day, @end_day, :class => :date_field %>
+			<%= content_tag :button, "Submit", :type => :submit, :class => :submit_button %>
+		</div>
+		<div class="left">
+			<% if @chart_url %>
+				<%= image_tag(@chart_url) %>
+			<% else %>
+				<div>No data for this date range.</div>
+			<% end %>
+		</div>
+	</div>
+	<div class="left section" id="total_stats">
+		<h3 class="header">Total Activity</h3>
+		<table>
+			<tr>
+				<th>Days</th>
+				<th>Feats</th>
+				<th>Badges</th>
+			</tr>
+			<tr>
+				<td><%= @num_days %></td>
+				<td><%= @total_stats[:feats] %></td>			
+				<td><%= @total_stats[:badges] %></td>
+			</tr>
+		</table>
+	</div>
+	<div class="left section" id="top_badges">
+		<h3 class="header">Top Badges</h3>
+		<% if @top_badges.length > 0 %>
+			<table>
+				<tr>
+					<th>Badge</th>
+					<th>Awarded</th>
+				</tr>
+				<% for badge in @top_badges %>
+					<tr>
+						<td><%= badge[:badge_name]%></td>
+						<td><%= badge[:badges]%></td>
+					</tr>
+				<% end %>
+			</table>
+		<% else %>
+			<div>No data for this date range.</div>
+		<% end %>
+	</div>
+	<div class="left section" id="top_feats">
+		<h3 class="header">Top Feats</h3>
+		<% if @top_feats.length > 0 %>
+			<table>
+				<tr>
+					<th>Feat</th>
+					<th>Performed</th>
+				</tr>
+				<% for feat in @top_feats %>
+					<tr>
+						<td><%= feat[:feat_name]%></td>
+						<td><%= feat[:feats]%></td>
+					</tr>
+				<% end %>
+			</table>
+		<% else %>
+			<div>No data for this date range.</div>
+		<% end %>
+	</div>		
+<% end %>

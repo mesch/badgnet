@@ -50,10 +50,11 @@
 	<div class="section">
 		<table id="feat_table">
 			<tr>
-				<td>Feat</td>
-				<td>Threshold</td>
-				<td><input type="button" value="Add Feat" 
-					onclick="add_feat_row(<%= options_from_collection_for_select(@client_feats, "id", "name").to_json %>);" ></td>
+				<th>Feat</th>
+				<th>Threshold</th>
+				<th><input type="button" value="Add Feat" 
+					onclick="add_feat_row(<%= options_from_collection_for_select(@client_feats, "id", "name").to_json %>);" >
+				</th>
 			</tr>
 			<% if @feats.length > 0 %>	
 				<% for f in @feats %>

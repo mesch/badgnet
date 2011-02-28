@@ -130,6 +130,10 @@ H1 {
 	}
 }
 
+.date_field {
+	width: 60px;
+}
+
 .spinner {
 	position: absolute;
 	@include opacity(0.9);

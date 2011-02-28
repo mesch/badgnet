@@ -33,6 +33,6 @@ class UserBadgesTest < ActiveSupport::TestCase
     # can't add same badge
     ub = UserBadge.new(:user_id => @kilgore.id, :client_id => @bob.id, :badge_id => @first.id)
     assert !ub.save
-  end    
+  end  
   
 end

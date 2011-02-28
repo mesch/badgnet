@@ -3,19 +3,36 @@ require 'subdomain'
 Badgnet::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
-  
-  namespace :admin do
-    match '/', :to => "admin#index", :as => :home
-    resources :clients do
-      post 'multi_update', :on => :collection
-      post 'generate_api_key', :on => :member
-    end
-  end  
 
+  # API
+  constraints(APISubdomain) do
+    match '/' => "sites#home" # for now - will probably point to some help doc
+    namespace :v1 do
+      match '/' => "sites#home" # for now - will probably point to some help doc
+      controller :clients do
+        match '/clients/badges' => :badges, :via => :get
+        match '/clients/feats' => :feats, :via => :get
+      end
+      controller :users do
+        match '/users/badges' => :badges, :via => :get
+        match '/users/feats' => :feats, :via => :get
+      end
+      controller :feats do
+        match '/feats/log' => :log, :via => :post
+      end
+      controller :reports do
+        match 'reports/client' => :client, :via => :get
+        match 'reports/badges' => :badges, :via => :get
+        match 'reports/feats' => :feats, :via => :get
+      end
+    end
+  end
+  
+  # Client
   namespace :client do
     scope :via => :get do
-      match '/' => :home      ### TODO: add a real home page
-      match '/home' => :home  ### TODO: add a real home page
+      match '/' => :home
+      match '/home' => :home
       match '/login' => :login
       match '/logout' => :logout
       match '/signup' => :signup
@@ -33,6 +50,7 @@ Badgnet::Application.routes.draw do
       match '/images' => :images
     end
     scope :via => :post do
+      match '/home' => :home
       match '/login' => :login
       match '/signup' => :signup
       match '/reactivate' => :reactivate
@@ -48,24 +66,16 @@ Badgnet::Application.routes.draw do
     end
   end
   
-  constraints(APISubdomain) do
-    match '/' => "sites#home" # for now - will probably point to some help doc
-    namespace :v1 do
-      match '/' => "sites#home" # for now - will probably point to some help doc
-      controller :clients do
-        match '/clients/badges' => :badges, :via => :get
-        match '/clients/feats' => :feats, :via => :get
-      end
-      controller :users do
-        match '/users/badges' => :badges, :via => :get
-        match '/users/feats' => :feats, :via => :get
-      end
-      controller :feats do
-        match '/feats/log' => :log, :via => :post
-      end
+  # Admin
+  namespace :admin do
+    match '/', :to => "admin#index", :as => :home
+    resources :clients do
+      post 'multi_update', :on => :collection
+      post 'generate_api_key', :on => :member
     end
   end
 
+  # Public Site
   match '/privacy', :to => "application#privacy"
   match '/tos', :to => "application#tos"
   

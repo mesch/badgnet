@@ -34,9 +34,15 @@
 				</td>
 			</tr>
 			<tr>
-				<td><%= label_tag 'API Key' %></td> 
+				<td><%= label_tag 'API Key', 'API Key' %></td> 
 				<td>
 					<%= label_tag "", @client.api_key %>
+				</td>
+			</tr>
+			<tr>
+				<td><%= label_tag 'Time Zone', 'Time Zone' %></td> 
+				<td>
+					<%= select_tag :time_zone, time_zone_options_for_select(@client.time_zone) %>
 				</td>
 			</tr>			
 		</table>

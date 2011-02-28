@@ -17,6 +17,7 @@ existingbob:
     activation_code: 1234567890
     api_key: f1f3559fb8d53a904fc1737533e8e955ddd09215    
     activated: true
+    time_zone: "Hawaii"
 
 longbob:
     name: "Bob's Big Boy" 

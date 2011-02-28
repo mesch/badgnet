@@ -1,0 +1,70 @@
+existingbobs1:
+    client: existingbob
+    day: '2011-01-01'
+    users: 90
+    user_badges: 6
+    user_feats: 100
+
+existingbobs2:
+    client: existingbob
+    day: '2011-01-02'
+    users: 100
+    user_badges: 7
+    user_feats: 153
+
+existingbobs3:
+    client: existingbob
+    day: '2011-01-03'
+    users: 110
+    user_badges: 8
+    user_feats: 146
+        
+existingbobs4:
+    client: existingbob
+    day: '2011-01-04'
+    users: 120
+    user_badges: 33
+    user_feats: 142
+    
+existingbobs5:
+    client: existingbob
+    day: '2011-01-05'
+    users: 130
+    user_badges: 20
+    user_feats: 162 
+
+existingbobs6:
+    client: existingbob
+    day: '2011-01-06'
+    users: 140
+    user_badges: 60
+    user_feats: 177
+
+existingbobs7:
+    client: existingbob
+    day: '2011-01-07'
+    users: 150
+    user_badges: 43
+    user_feats: 185
+    
+existingbobs8:
+    client: existingbob
+    day: '2011-01-08'
+    users: 160
+    user_badges: 86
+    user_feats: 190
+        
+existingbobs9:
+    client: existingbob
+    day: '2011-01-09'
+    users: 170
+    user_badges: 72
+    user_feats: 193
+            
+existingbobs0:
+    client: existingbob
+    day: '2011-01-10'
+    users: 180
+    user_badges: 102
+    user_feats: 204
+    

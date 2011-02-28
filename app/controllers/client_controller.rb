@@ -1,3 +1,6 @@
+require 'gchart'
+require 'date_helper'
+
 class ClientController < ApplicationController
   before_filter :login_required, :except => [:signup, :forgot_password, :activate, :reactivate, :login, :logout]
 
@@ -162,21 +165,77 @@ class ClientController < ApplicationController
     render :layout => false
   end
 
-  # Account methods
-  ### TODO - add a real home page
   def home
-    redirect_to :action => :badges
+    use_default = false
+    
+    if request.post?
+      if DateHelper.verify(params[:start_day]) && DateHelper.verify(params[:end_day])
+        start_date = Time.zone.parse(params[:start_day]).to_date
+        end_date = Time.zone.parse(params[:end_day]).to_date
+
+        if start_date > end_date
+          use_default = true
+          flash.now[:warning] = "Start Day cannot be after End Day."
+        end
+        if end_date - start_date + 1 > 365
+          use_default = true
+          flash.now[:warning] = "Date range cannot be greater than 1 year."
+        end
+      else
+        use_default = true
+        flash.now[:error] = "Dates must be of the form: MM/DD/YY"
+      end
+    else # request.get
+      use_default = true
+    end
+
+    if use_default
+      # default to last 7 days
+      start_date = 1.days.ago.to_date - 6.days
+      end_date = 1.days.ago.to_date
+    end
+    
+    @num_days = end_date - start_date + 1
+    
+    @total_stats = ClientStat.total_stats(@current_client.id, start_date, end_date)
+    client_stats = ClientStat.find(:all, 
+      :conditions => {:client_id => @current_client.id, :day => start_date..end_date},
+      :order => "day asc")
+    @table_stats = []
+    if client_stats.length > 0
+      table_stats = ClientStat.fill_in_zeros(client_stats, @current_client.id, start_date, end_date)
+      chart_stats = ClientStat.chart_format(table_stats)
+      @chart_url = Gchart.line(
+        :size => '450x350',
+        :title => 'BadgMe Activity',
+        :data => chart_stats[:data],
+        :axis_with_labels => ['x','y'],
+        :axis_labels => chart_stats[:axis_labels],
+        :line_colors => ['60b0db','FFCC33'],
+        :legend => ['Feats','Badges'],
+        :min_value => 0,
+        :max_value => chart_stats[:max_value])
+      # blue: '60b0db'
+      # dark-blue: '3b5998'
+      # light-yellow: 'FAF7E3'
+      # dark-yellow: 'FFCC33'
+    end
+    
+    @top_badges = UserBadge.top_badges(@current_client.id, start_date, end_date)[0,5]
+    @top_feats = UserFeat.top_feats(@current_client.id, start_date, end_date)[0,5]
+  
+    @start_day = DateHelper.format(start_date)
+    @end_day = DateHelper.format(end_date)
   end
   
+  # Account methods
   def account
     @client = Client.find(@current_client.id)
     if request.post?
-      if params[:name]
-        if @client.update_attributes(:name => params[:name])
-          flash[:message] = "Your account has been updated."
-        else
-          flash[:warning] = "Could not update account. Please try again."
-        end
+      if @client.update_attributes(:name => params[:name], :time_zone => params[:time_zone])
+        flash[:message] = "Your account has been updated."
+      else
+        flash[:warning] = "Could not update account. Please try again."
       end
     end
   end
@@ -186,7 +245,7 @@ class ClientController < ApplicationController
     if request.post?
       c = Client.new(:name => params[:name], :username => params[:username], 
         :password => params[:password], :password_confirmation => params[:password_confirmation],
-        :email => params[:email])
+        :email => params[:email], :time_zone => params[:time_zone])
       # Captcha validation
       unless verify_recaptcha(:private_key => OPTIONS[:recaptcha_private_key])      
         flash[:warning] = "Invalid captcha results. Please try again."
@@ -210,9 +269,9 @@ class ClientController < ApplicationController
         flash[:warning] = "Login unsuccessful."
       else
         if c.active
-          if c.activated        
-            session[:client_id] = c.id
-            flash[:message]  = "Login successful."
+          if c.activated
+            initialize_client_session(c.id)      
+             flash[:message]  = "Login successful."
             redirect_to_stored
           else
             flash[:warning] = "You must activate your account."
@@ -226,7 +285,7 @@ class ClientController < ApplicationController
   end
 
   def logout
-    session[:client_id] = nil
+    initialize_client_session(nil)
     flash[:message] = 'Logged out.'
     redirect_to :action => 'login'
   end

@@ -10,6 +10,7 @@ module V1
       if client
         session[:client_id] = client.id
         @current_client = client
+        Time.zone = @current_client.time_zone
       else
         unauthorized
       end
@@ -18,6 +19,7 @@ module V1
     def logout
       session[:client_id] = nil
       @current_client = nil
+      Time.zone = nil
     end
 
     # success response

@@ -33,6 +33,12 @@ class ClientControllerTest < ActionController::TestCase
     assert_redirected_to :action=>'home'
   end
 
+  def test_set_time_zone
+    post :login, :username => "bob", :password => "test"
+    get :home
+    assert_equal Time.zone.name, @bob.time_zone
+  end
+  
   def test_signup
     #unfortunately can't test passing captcha - this will fail for now
     post :signup, :username => "newbob", :password => "newpassword", :password_confirmation => "newpassword", :email => "newbob@mcbob.com" 
@@ -283,17 +289,34 @@ class ClientControllerTest < ActionController::TestCase
     assert_response :redirect
     assert session[:client_id]
     #name too long
-    post :account, :name => '123456789012345678901234567890123456789012345678900'
+    post :account, :name => '123456789012345678901234567890123456789012345678900', :time_zone => @bob.time_zone
     assert_response :success
     assert flash[:warning]
     assert_template "client/account"
     assert_equal Client.find(@bob.id).name, old_name
     #success
-    post :account, :name => '1234567890'
+    post :account, :name => '1234567890', :time_zone => @bob.time_zone
     assert_response :success
     assert flash[:message]
     assert_template "client/account"
     assert_equal Client.find(@bob.id).name, '1234567890' 
+  end
+  
+  def test_change_time_zone
+    #can login
+    post :login, :username => "bob", :password => "test"
+    assert_response :redirect
+    assert session[:client_id]
+    #success
+    post :account, :name => @bob.name, :time_zone => 'Hawaii'
+    assert_response :success
+    assert flash[:message]
+    assert_template "client/account"
+    assert_equal Client.find(@bob.id).time_zone, 'Hawaii'
+    # go back to page and check time zone
+    get :account
+    assert_response :success
+    assert_equal Time.zone.name, 'Hawaii'
   end
 
 ## unable to test due to @request not getting set in ApplicationController

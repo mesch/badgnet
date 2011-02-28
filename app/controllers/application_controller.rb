@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   def login_required
     if session[:client_id]
       @current_client = Client.find(session[:client_id])
+      Time.zone = @current_client.time_zone
       return true
     end
     flash[:warning]='Please login to continue.'
@@ -19,6 +20,11 @@ class ApplicationController < ActionController::Base
     else
       redirect_to :controller=>'client', :action=>'home'
     end
+  end
+  
+  def initialize_client_session(client_id)
+    session[:client_id] = client_id
+    session[:return_to] = nil
   end
 
 end
