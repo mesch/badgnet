@@ -6,7 +6,8 @@ class UserFeat < ActiveRecord::Base
   belongs_to :feat
 
   def as_json(options={})
-    { :client_id => self.client_id, :feat_id => self.feat_id, :timestamp => self.created_at }
+    { :client_id => self.client_id, :feat_id => self.feat_id, 
+      :timestamp => self.created_at.strftime(OPTIONS[:time_format]) }
   end
   
   def self.top_feats(client_id, start_date, end_date)

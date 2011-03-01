@@ -34,5 +34,9 @@ OPTIONS[:email_password] = ENV['SENDGRID_PASSWORD']
 OPTIONS[:email_domain] = ENV['SENDGRID_PASSWORD']
 OPTIONS[:enable_starttls_auto] = false
 
+# Date / Time formatting
+OPTIONS[:date_format] = '%m/%d/%y'
+OPTIONS[:time_format] = '%Y-%m-%d %H:%M:%S'
+
 
 

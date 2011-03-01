@@ -116,12 +116,13 @@
 	margin-bottom: 10px;
 }
 
+.warning {
+	margin-top: 10px;
+	color: $red;
+}
+
 #feat_table {
 	width: 400px;
-
-	TH {
-		font-weight: bold;
-	}
 }
 
 #client_home {
@@ -135,16 +136,11 @@
 		border: 1px solid $light-grey;
 	}
 	
-	TH {
-		font-weight: bold;
+	#no_data {
+		width: 450px;
+		margin-top: 20px;
 	}
 	
-}
-
-#client_account {
-	TABLE, TH, TD {
-		border: 1px solid $light-grey;
-	}
 }
 
 #client_badges {
@@ -200,19 +196,6 @@
 		width: 280px;
 		margin-bottom: 10px;
 	}
-
-	#feat_table {
-		width: 280px;
-	}
-
-	#no_badges {
-		margin-top: 10px;
-		text-align: center;
-	}
-
-	#awards {
-		@include min-height(150px);	
-	}
 }
 
 #client_badge {
@@ -241,10 +224,6 @@
 	.selected {
 		background-color: $dark-grey;
 	}	
-		
-	INPUT[type="text"] {
-		padding: 2px;
-	}
 
 	#id {
 		width: 100 px;
@@ -271,10 +250,6 @@
 	.selected {
 		background-color: $dark-grey;
 	}	
-	
-	INPUT[type="text"] {
-		padding: 2px;
-	}
 
 	#id {
 		width: 165px;
@@ -328,20 +303,7 @@
 }
 
 #client_account {
-	#id {
-		width: 165px;
-	}
-
 	#name {
 		width: 165px;
 	}
-
-	#username {
-		width: 165px;
-	}	
-
-	#email {
-		width: 350px;
-	}
-	
 }

@@ -28,26 +28,30 @@ class User < ActiveRecord::Base
 
   def user_badges_by_client_id(client_id)
     return UserBadge.find(:all, :joins => :user, 
-      :conditions => ["users.id = ? AND user_badges.client_id = ?", self.id, client_id])    
+      :conditions => ["users.id = ? AND user_badges.client_id = ?", self.id, client_id],
+      :order => "created_at asc")    
   end
 
   def user_badges_by_client_id_grouped(client_id)
     return UserBadge.count(:all, 
       :joins => :user, 
       :conditions => ["users.id = ? AND user_badges.client_id = ?", self.id, client_id],
-      :group => "user_badges.badge_id")
+      :group => "user_badges.badge_id",
+      :order => "count(*) desc")
   end
 
   def user_feats_by_client_id(client_id)
     return UserFeat.find(:all, :joins => :user, 
-      :conditions => ["users.id = ? AND user_feats.client_id = ?", self.id, client_id])    
+      :conditions => ["users.id = ? AND user_feats.client_id = ?", self.id, client_id],
+      :order => "created_at asc")    
   end
   
   def user_feats_by_client_id_grouped(client_id)
     return UserFeat.count(:all, 
       :joins => :user, 
       :conditions => ["users.id = ? AND user_feats.client_id = ?", self.id, client_id],
-      :group => "user_feats.feat_id")
+      :group => "user_feats.feat_id",
+      :order => "count(*) desc")
   end
 
   def update_badges(client_id)

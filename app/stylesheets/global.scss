@@ -101,6 +101,20 @@ H1 {
 	font-size: $default-font-size + 4;
 }
 
+TH {
+	font-weight: bold;
+	padding: 2px;
+}
+
+TD {
+	padding: 2px;	
+}
+
+
+INPUT[type="text"] {
+	padding: 2px;
+}
+
 .section {
 	margin-bottom: 25px;
 	padding-left: 10px;

@@ -61,7 +61,7 @@ class Client < ActiveRecord::Base
     # odd behavior of ActiveRecord count - need to do this ...
     users = UserFeat.count(
       :group => :user_id,
-      :conditions => ["client_id = ? AND created_at BETWEEN ? AND ? AND user_id", self.id, start_time, end_time]).length
+      :conditions => ["client_id = ? AND created_at BETWEEN ? AND ?", self.id, start_time, end_time]).length
 
     begin
       record = ClientStat.new(:client_id => self.id, :day => start_time.to_date,

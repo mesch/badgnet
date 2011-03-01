@@ -1,5 +1,3 @@
-require 'date_helper'
-
 module V1
 
   class ReportsController < ApiController
@@ -29,7 +27,7 @@ module V1
           end
         else
           stats = ClientStat.total_stats(@current_client.id, start_date, end_date)
-          data << [DateHelper.format(start_date), DateHelper.format(end_date),
+          data << [start_date.strftime(OPTIONS[:date_format]), end_date.strftime(OPTIONS[:date_format]),
             stats[:badges], stats[:feats]]
         end 
         success(data)

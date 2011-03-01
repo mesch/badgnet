@@ -1,5 +1,4 @@
 require 'gchart'
-require 'date_helper'
 
 class ClientController < ApplicationController
   before_filter :login_required, :except => [:signup, :forgot_password, :activate, :reactivate, :login, :logout]
@@ -169,7 +168,7 @@ class ClientController < ApplicationController
     use_default = false
     
     if request.post?
-      if DateHelper.verify(params[:start_day]) && DateHelper.verify(params[:end_day])
+      if verify_date(params[:start_day]) && verify_date(params[:end_day])
         start_date = Time.zone.parse(params[:start_day]).to_date
         end_date = Time.zone.parse(params[:end_day]).to_date
 
@@ -204,7 +203,9 @@ class ClientController < ApplicationController
     @table_stats = []
     if client_stats.length > 0
       table_stats = ClientStat.fill_in_zeros(client_stats, @current_client.id, start_date, end_date)
+      p table_stats
       chart_stats = ClientStat.chart_format(table_stats)
+      p chart_stats
       @chart_url = Gchart.line(
         :size => '450x350',
         :title => 'BadgMe Activity',
@@ -224,8 +225,8 @@ class ClientController < ApplicationController
     @top_badges = UserBadge.top_badges(@current_client.id, start_date, end_date)[0,5]
     @top_feats = UserFeat.top_feats(@current_client.id, start_date, end_date)[0,5]
   
-    @start_day = DateHelper.format(start_date)
-    @end_day = DateHelper.format(end_date)
+    @start_day = start_date.strftime(OPTIONS[:date_format])
+    @end_day = end_date.strftime(OPTIONS[:date_format])
   end
   
   # Account methods

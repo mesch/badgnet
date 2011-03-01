@@ -26,5 +26,13 @@ class ApplicationController < ActionController::Base
     session[:client_id] = client_id
     session[:return_to] = nil
   end
+  
+  def verify_date(string)
+    begin
+      return Time.zone.parse(string) ? true : false
+    rescue
+      return false
+    end
+  end
 
 end

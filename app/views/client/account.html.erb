@@ -42,7 +42,7 @@
 			<tr>
 				<td><%= label_tag 'Time Zone', 'Time Zone' %></td> 
 				<td>
-					<%= select_tag :time_zone, time_zone_options_for_select(@client.time_zone) %>
+					<%= label_tag "", @client.time_zone %>
 				</td>
 			</tr>			
 		</table>

@@ -34,9 +34,12 @@ class ClientControllerTest < ActionController::TestCase
   end
 
   def test_set_time_zone
-    post :login, :username => "bob", :password => "test"
+    old_time_zone = Time.zone.name
+    # Time zone should be different than local time
+    post :login, :username => "existingbob", :password => "test"
     get :home
-    assert_equal Time.zone.name, @bob.time_zone
+    assert_equal Time.zone.name, @existingbob.time_zone
+    assert_not_equal Time.zone.name, old_time_zone
   end
   
   def test_signup
@@ -455,5 +458,33 @@ class ClientControllerTest < ActionController::TestCase
   end
   
   ### TODO - how to test updating badges?
+
+  def test_home
+    self.login
+    get :home
+    assert_response :success
+    assert_nil flash[:warning]
+    assert_nil flash[:error]    
+    # post bad day formats
+    post :home, :start_day => '01/01/11', :end_day => 'test'
+    assert_response :success
+    assert flash[:error]
+    post :home, :start_day => 'test', :end_day => '01/02/11'
+    assert_response :success
+    assert flash[:error]
+    # start_day after end_day
+    post :home, :start_day => '01/02/11', :end_day => '01/01/11'
+    assert_response :success
+    assert flash[:warning]
+    # date range over 365 days - due to limit with googlecharts   
+    post :home, :start_day => '01/01/10', :end_day => '01/01/11'
+    assert_response :success
+    assert flash[:warning]
+    # successfull post  
+    post :home, :start_day => '01/01/11', :end_day => '01/10/11'
+    assert_response :success
+    assert_nil flash[:warning]
+    assert_nil flash[:error]    
+  end
 
 end
